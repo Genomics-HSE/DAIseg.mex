@@ -36,9 +36,9 @@ GM19129
 1e-08    #recombination rate
 1000    #window size
 start end    #position of the first SNP in .vcf file
-t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
 t_arch^c    #Coalescent time of AMH and Neanderthals
 t_split^c    #Coalescent time out of Africa
+t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
 t_ea^c # coalescent time of Europeans and Asians
 t_mex^c # modern coalescent time
 t_intr #introgression time
@@ -81,3 +81,23 @@ Add full path to files  of 1000GP and three neanderthals to variables __$NAME100
 >./panel.preparation.sh
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
+
+
+
+
+## Step 1.  Make observations
+
+You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
+
+>__./make.obs.sh__
+
+and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__, __obs.yri.txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph). 
+
+
+## Step 2.1 Run DAI.seg without EM algorithm
+>  python daiseg.mex.py  --EM no --HMM_par par.file.txt  --o output.tracts.txt
+
+where file par.file.txt was created on the previous Step. 
+
+
+
