@@ -94,10 +94,18 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__, __obs.yri.txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph). 
 
 
-## Step 2.1 Run DAI.seg without EM algorithm
+## Step 2.0 Run DAI.seg without EM algorithm
 >  python daiseg.mex.py  --EM no --HMM_par par.file.txt  --o output.tracts.txt
 
 where file par.file.txt was created on the previous Step. 
 
+## Step 3 (optional) Run DAI.seg using EM algorithm
 
+par.file.txt obtained on the Step 1 could be used as the initial guess for EM algorithm.
+
+There are two possible options to estimate parameters: 
+
+> python daiseg.mex.py --EM yes --HMM_par par.file.txt --o out.txt
+
+to obtain estimations only for coalescent times 
 
