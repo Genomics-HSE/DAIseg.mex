@@ -2,7 +2,7 @@
 Highly accurate method for detecting archaic segments in the modern admixed genomes 
 
 
-![Demography](https://github.com/Genomics-HSE/DAIseg.mex/blob/main/Mex.svg)
+![Demography](https://github.com/Genomics-HSE/DAIseg.mex/blob/main/utilities/Mex.svg)
 
 # DAIseg.mex
 DAIseg.mex method is created to detect ancient introgressed segments using unadmixed outgroup population and several reference archaic genomes. 
