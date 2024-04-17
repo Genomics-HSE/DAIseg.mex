@@ -64,7 +64,7 @@ for i in range(len(lines_yri)):
     for j in range(len(lines_yri[i])):
         lines_yri[i][j]=int(lines_yri[i][j])
         
-print(lines_yri[0:5])
+
         
         
         
