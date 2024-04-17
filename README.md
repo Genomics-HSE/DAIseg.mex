@@ -105,7 +105,7 @@ par.file.txt obtained on the Step 1 could be used as the initial guess for EM al
 
 There are two possible options to estimate parameters: 
 
-> python daiseg.mex.py --EM yes --HMM_par par.file.txt --o out.txt
+> python daiseg.mex.py --EM yes --HMM_par par.file.txt --o output.txt
 
 to obtain estimations only for coalescent times 
 
