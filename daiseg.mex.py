@@ -11,6 +11,8 @@ import sys
 
 parser = argparse.ArgumentParser(description='DAIseg') 
 
+parser.add_argument('--location', type=str, help='File with positions on chr')
+
 parser.add_argument('--obs_eu', type=str, help='File with observations with respect to Europeans')
 parser.add_argument('--obs_na', type=str, help='File with observations with respect to Americans')
 parser.add_argument('--obs_af', type=str, help='File with observations with respect to Africans')
@@ -29,6 +31,12 @@ args = parser.parse_args()
 
 N = 5 # number of hidden states
 
+with open(args.location,'r') as f1:
+
+    seq_start, seq_end = f1.readline().split(' ')
+    seq_start = int(seq_start)
+    seq_end = int(seq_end.replace('\n',''))    
+    
 
 f = open(args.HMM_par, 'r')
 GEN_time = float(f.readline())
@@ -36,9 +44,10 @@ MU = float(f.readline())
 RR = float(f.readline())
 L = int(f.readline())
 
-seq_start, seq_end = f.readline().split(' ')
-seq_start = int(seq_start)
-seq_end = int(seq_end.replace('\n',''))
+#seq_start, seq_end = f.readline().split(' ')
+#seq_start = int(seq_start)
+#seq_end = int(seq_end.replace('\n',''))
+
 
 
 Lambda_0=np.zeros(11)
