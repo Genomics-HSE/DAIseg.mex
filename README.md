@@ -78,7 +78,7 @@ and  archaic samples
 Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
 
 Add full path to files  of 1000GP and three neanderthals to variables __$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ , change  variable and run 
->./panel.preparation.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt
+>./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
