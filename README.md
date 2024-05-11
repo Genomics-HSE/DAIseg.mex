@@ -95,7 +95,7 @@ and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__,
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->  python3 daiseg.mex.py  --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
+>  python3 daiseg.mex.py  --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
 
 where file par.file.txt was created on the previous Step. 
 
@@ -105,7 +105,7 @@ par.file.txt obtained on the Step 1 could be used as the initial guess for EM al
 
 There are two possible options to estimate parameters: 
 
-> python daiseg.mex.py --EM yes --HMM_par par.file.txt --o output.txt
+> python daiseg.mex.py --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt  --EM yes --HMM_par par.file.txt --o output.txt
 
 to obtain estimations only for coalescent times 
 
