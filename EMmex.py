@@ -107,6 +107,7 @@ def def_ksi( a, b, o, alpha, beta):
 
 
 
+
 def new_lambda_mex(o, gamma):
     lmbd=0
     
@@ -225,7 +226,6 @@ def EM_algorithm(p, o, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
     em_steps = 20
 
     for i in range(em_steps):
-
         lmbd_new = np.array(E_step(cut, p, o, n_states, mut_rate, rr,lambda_0, bnds))
 
 
@@ -234,4 +234,157 @@ def EM_algorithm(p, o, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
         lmbd = lmbd_new
 
     return lmbd
+
+
+
+
+
+
+
+#EM where we use several observations simultaneously
+def new_lambda_mex_common(o_mas, gamma_mas):
+    lmbd=0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):
+            lmbd += o[t, 0] * ( gamma[0, t] + gamma[1, t]) + o[t, 1] * (gamma[2, t] + gamma[3, t]) + o[t, 2]  * gamma[4, t]     
+        
+    return lmbd/((len(o)-1)*len(o_mas))
+
+
+def new_lambda_n_common(o_mas, gamma_mas):
+    lmbd = 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):
+            lmbd += o[t, 3] * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + o[t, 2] * (gamma[1, t] + gamma[3, t]) 
+        
+    return lmbd/ ((len(o)-1)*len(o_mas))
+
+def new_lambda_i_common(o_mas, gamma_mas):
+    nom=0
+    denom=0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]   
+        for t in range(1, len(o), 1):   
+            nom += o[t, 3] * (gamma[1, t] + gamma[3, t])
+            denom += gamma[1, t] + gamma[3, t]
+        
+    return nom / denom
+
+def new_lambda_af_common(o_mas, gamma_mas):
+    nom, denom = 0, 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i] 
+        for t in range(1, len(o), 1):   
+            nom += o[t, 2] * ( gamma[0, t] + gamma[2, t]) + (o[t, 0] + o[t, 1]) * gamma[4, t]
+            denom += gamma[0, t] + gamma[2, t]+ 2 * gamma[4, t]    
+    
+    return nom/ denom
+
+def new_lambda_ea_common(o_mas, gamma_mas):
+    nom, denom = 0, 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):  
+            nom += o[t, 1] * ( gamma[0, t] + gamma[1, t]) + o[t, 0]  * (gamma[2, t]+gamma[3,t])
+            denom += gamma[0, t] + gamma[1, t] +  gamma[2, t] + gamma[3, t]
+    
+    return nom/ denom
+
+def new_a_common(coeff_a, lmbd_0, bnds, cut, mut_rate,rr):
+    d=cut* mut_rate
+    x0=[lmbd_0[5], lmbd_0[6]]
+    def multi_Q(x):
+        x=np.array(x)
+        Q=0            
+        a = hmm.initA2(x[0]/d, x[1]/d, rr, cut, lmbd_0[7], lmbd_0[8], lmbd_0[9], lmbd_0[10])            
+
+
+
+        for ii in range(N):
+            for jj in range(N):
+                Q += math.log(a[ii,jj]) * coeff_a[ii,jj]
+
+        return -Q
+
+    def gradient_respecting_bounds(bounds, fun, eps=1e-8):
+        """bounds: list of tuples (lower, upper)"""
+        def gradient(x):
+            fx = fun(x)
+            grad = np.zeros(len(x))
+            for k in range(len(x)):
+                d = np.zeros(len(x))
+                d[k] = eps if x[k] + eps <= bounds[k][1] else -eps
+                grad[k] = (fun(x + d) - fx) / d[k]
+            return grad
+        return gradient
+
+    opt_result = scipy.optimize.minimize(multi_Q, x0,  bounds=bnds,  
+                                         jac=gradient_respecting_bounds(bnds, multi_Q),  
+                                         method="L-BFGS-B" )
+
+
+    return opt_result.x[0], opt_result.x[1]       
+
+
+
+def E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lambda_old, bnds):
+
+    d=mut_rate * cut
+    gamma_mas, ks_mas=[], []    
+    coeff_a = np.zeros((N, N))
+
+    b = hmm.initB(mut_rate, cut, lambda_old[0:5], n_states)  
+    a = hmm.initA(lambda_old[5]/d, lambda_old[6]/d, rr, cut, lambda_old[7], lambda_old[8], lambda_old[9], lambda_old[10])
+    for o in o_mas:
+        
+        alpha, sc_factors = alpha_scaled_opt(a,b, o, p)
+        beta = beta_scaled_opt(a, b, o, sc_factors)    
+        gamma = def_gamma(alpha, beta)
+        ks = def_ksi( a, b, o, alpha, beta)
+
+        gamma_mas.append(gamma)
+        ks_mas.append(ks)      
+        
+    
+
+        for i in range(N):
+            for j in range(N):                
+                for t in range(len(o)-1):
+                    coeff_a[i, j] += ks[i, j, t] 
+    
+    upd = new_a(coeff_a, lambda_old, bnds, cut, mut_rate,rr)
+
+    
+    return [new_lambda_i_common(o_mas, gamma_mas), new_lambda_n_common(o_mas, gamma_mas), 
+            new_lambda_af_common(o_mas, gamma_mas), 
+            new_lambda_ea_common(o_mas, gamma_mas),new_lambda_mex_common(o_mas, gamma_mas), 
+            upd[0], upd[1], 
+            lambda_old[7], lambda_old[8], lambda_old[9], lambda_old[10]]
+
+
+
+def EM_common(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
+    d=mut_rate * cut
+    lmbd = np.array(lambda_0)
+    em_steps = 20
+
+    for i in range(em_steps):
+#        print('Step ', i, lmbd[0:7]/d*29)
+        lmbd_new = np.array(E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lambda_0, bnds))
+
+
+        if LNG.norm(lmbd_new-lmbd) < epsilon:
+            break
+        lmbd = lmbd_new
+
+    return lmbd
+
+
 
