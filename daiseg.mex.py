@@ -3,15 +3,25 @@ import argparse
 import numpy as np
 import HMMmex as hmm
 import EMmex as EM
+import sys
+
+
 
 
 
 parser = argparse.ArgumentParser(description='DAIseg') 
 
+parser.add_argument('--obs_eu', type=str, help='File with observations with respect to Europeans')
+parser.add_argument('--obs_na', type=str, help='File with observations with respect to Americans')
+parser.add_argument('--obs_af', type=str, help='File with observations with respect to Africans')
+parser.add_argument('--obs_archaic', type=str, help='File with observations with respect to Archaic reference genomes')
+
 parser.add_argument('--EM', type=str, help='Whether or not to use EM algorithm')
+
 parser.add_argument('--HMM_par', type= str, help='File with parameters')
 parser.add_argument('--o', type= str, help = 'Name of output file' )
 parser.add_argument('--EM_est', type= str, help = 'Make estimation of the all parameters or only coalescent times' )
+
 
 
 args = parser.parse_args()
@@ -50,7 +60,7 @@ d=MU*L
 
 
 seq0, seq1, seq2, seq3 = [], [], [], []
-with open('obs.eu.txt', "r") as f0, open('obs.na.txt', "r") as f1, open('obs.yri.txt', "r") as f2,open('obs.neand.txt', "r") as f3:
+with open(args.obs_eu, "r") as f0, open(args.obs_na, "r") as f1, open(args.obs_af, "r") as f2,open(args.obs_archaic, "r") as f3:
     for line0, line1, line2, line3 in zip(f0, f1, f2, f3):
     
         row = line0.replace('\n','').split(' ')

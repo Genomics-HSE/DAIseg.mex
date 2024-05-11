@@ -225,7 +225,7 @@ def EM_algorithm(p, o, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
     em_steps = 20
 
     for i in range(em_steps):
-        print(i)
+
         lmbd_new = np.array(E_step(cut, p, o, n_states, mut_rate, rr,lambda_0, bnds))
 
 
