@@ -35,7 +35,6 @@ GM19129
 1.25e-08    #mutation rate μ
 1e-08    #recombination rate
 1000    #window size
-start end    #position of the first SNP in .vcf file
 t_arch^c    #Coalescent time of AMH and Neanderthals
 t_split^c    #Coalescent time out of Africa
 t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
@@ -47,6 +46,11 @@ t_mex # time of modern admixture
 0.45 # portion of European ancestry
 0.45 # portion of American ancestry
 0.1 # Portion of African ancestry
+```
+
+*  __position.txt__
+```note
+start_chr end_chr
 ```
 
 By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to make  initiall guess for the EM algorithm on Step 2. These values are good to find archqic segments but using EM algorithm allows to find short segments.
@@ -95,7 +99,7 @@ and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__,
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->  python3 daiseg.mex.py  --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
+>  python3 daiseg.mex.py  --location position.txt --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
 
 where file par.file.txt was created on the previous Step. 
 
@@ -105,7 +109,7 @@ par.file.txt obtained on the Step 1 could be used as the initial guess for EM al
 
 There are two possible options to estimate parameters: 
 
-> python daiseg.mex.py --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt  --EM yes --HMM_par par.file.txt --o output.txt
+> python daiseg.mex.py -location position.txt --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt  --EM yes --HMM_par par.file.txt --o output.txt
 
 to obtain estimations only for coalescent times 
 
