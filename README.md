@@ -77,8 +77,8 @@ and  archaic samples
 
 Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
 
-Add full path to files  of 1000GP and three neanderthals to variables __$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.sh__ , change $CHR variable and run 
->./panel.preparation.sh
+Add full path to files  of 1000GP and three neanderthals to variables __$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ , change  variable and run 
+>./panel.preparation.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
@@ -89,13 +89,13 @@ The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
 
->__./make.obs.sh__
+>__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt__
 
 and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__, __obs.yri.txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph). 
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->  python daiseg.mex.py  --EM no --HMM_par par.file.txt  --o output.tracts.txt
+>  python3 daiseg.mex.py  --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
 
 where file par.file.txt was created on the previous Step. 
 
