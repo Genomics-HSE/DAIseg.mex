@@ -128,6 +128,9 @@ def EM_function(seq, lambda_0, n_st):
 
     Lambda_new = EM.EM_algorithm(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds)
     return Lambda_new
+    
+def EM2(seq, lambda_0,n_st):
+    return EM.EM_common(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds)
 
 tracts_HMM_result = []
 if args.EM=='no':
@@ -139,8 +142,9 @@ if args.EM=='no':
 
         
 if args.EM=='yes': 
-    for idx in range(0, len(seq)):             
-        Lambda_opt = EM_function(SEQ[idx], Lambda_0, N_st)        
+               
+    Lambda_opt = EM2(SEQ, Lambda_0, N_st) 
+    for idx in range(0, len(seq)):       
         tracts_HMM_result.append(run_daiseg(Lambda_opt, SEQ, N_st, idx)) 
         
 
