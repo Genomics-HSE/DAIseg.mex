@@ -40,10 +40,9 @@ cat ${mex} ${eu} ${na} ${af} > samples.for.hmm.txt
 
 
 bcftools query -f '%POS\n' ${NAME1000}|sort|uniq -cd   > dublicated.snps.txt
-sed -i 's/^ *//' dublicated.snps.txt
-sed -i 's/.* //' dublicated.snps.txt 
-sed -i -e 's/^/${CHR}\t/' dublicated.snps.txt 
-bcftools view -v snps -T ^dublicated.snps.txt -S samples.for.hmm.txt  ${NAME1000} -Oz -o ${temporary}
+cut -d " " -f5 dublicated.snps.txt > dublicated.cut.snps.txt
+sed -i -e 's/^/${CHR}\t/' dublicated.cut.snps.txt 
+bcftools view -v snps -T ^dublicated.cut.snps.txt -S samples.for.hmm.txt  ${NAME1000} -Oz -o ${temporary}
 tabix -p vcf ${temporary}
 echo "removed dublicated snps and extract reference and observable samples"
 
@@ -51,6 +50,7 @@ echo "removed dublicated snps and extract reference and observable samples"
 bcftools query -f '%CHROM\t%POS\n' ${temporary} > positions.chr${CHR}.txt
 
 rm dublicated.snps.txt
+rm dublicated.cut.snps.txt
 
 
 
