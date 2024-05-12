@@ -116,23 +116,23 @@ T_AS_EU_split = 41997 #Asian European split
 T_AS_NA_split = 17000 # time of crossing Beringian (Nielsen et al., 2017; Mendes et al., 2020)
 T_MEX_admix = 466 
 
-with open('par.file.txt', "w") as file_pos:
-    file_pos.write(str(gen_time)+'\n')
-    file_pos.write(str(MU)+'\n')
-    file_pos.write(str(RR)+'\n')
-    file_pos.write(str(L)+'\n')
+#with open('par.file.txt', "w") as file_pos:
+#    file_pos.write(str(gen_time)+'\n')
+#    file_pos.write(str(MU)+'\n')
+#    file_pos.write(str(RR)+'\n')
+#    file_pos.write(str(L)+'\n')
 #    file_pos.write(str(lines_yri[0,0])+' ' +str(lines_yri[-1,0])+'\n')
-    file_pos.write(str( T_NEAND_AMH )+'\n')
-    file_pos.write(str(T_OOF_AF)+'\n')
-    file_pos.write(str( T_NEAND_migration )+'\n')
-    file_pos.write(str( T_AS_EU_split )+'\n')
-    file_pos.write(str( T_MEX_admix  )+'\n')
-    file_pos.write(str( T_NEAND_migration )+'\n')
-    file_pos.write(str( T_MEX_admix  )+'\n')
-    file_pos.write(str(0.025)+'\n')
-    file_pos.write(str(0.45)+'\n')
-    file_pos.write(str(0.45)+'\n')
-    file_pos.write(str(0.1))
+#    file_pos.write(str( T_NEAND_AMH )+'\n')
+#    file_pos.write(str(T_OOF_AF)+'\n')
+#    file_pos.write(str( T_NEAND_migration )+'\n')
+#    file_pos.write(str( T_AS_EU_split )+'\n')
+#    file_pos.write(str( T_MEX_admix  )+'\n')
+#    file_pos.write(str( T_NEAND_migration )+'\n')
+#    file_pos.write(str( T_MEX_admix  )+'\n')
+#    file_pos.write(str(0.025)+'\n')
+#    file_pos.write(str(0.45)+'\n')
+#    file_pos.write(str(0.45)+'\n')
+#    file_pos.write(str(0.1))
         
 
 for ind in range(n_mex):
