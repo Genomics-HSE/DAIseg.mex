@@ -21,7 +21,7 @@ __Output__: .txt file where each two lines corresponds to the one admixed(mexica
 
 
 # Files's summary
-*  __outgroup.txt__(Africa), __archaic.txt__(Neanderthals)  and __obs.samples.txt__(European), are .txt files which consist of the samples' ids of reference Africans, Neanderthals and observable Europeans written in a column
+*  __eu.txt__(European), __na.txt__(American), __af.txt__(African),  __archaic.txt__(Neanderthals)  and __mex.txt__(European), are .txt files which consist of the samples' ids of reference Africans, Neanderthals and observable Europeans written in a column
 ```note
 NA18484
 NA18489
@@ -48,7 +48,7 @@ t_mex # time of modern admixture
 0.1 # Portion of African ancestry
 ```
 
-*  __position.txt__
+*  __position.txt__ first-last positions in vcf
 ```note
 start_chr end_chr
 ```
@@ -58,14 +58,14 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 
 *  __all.chr22.vcf.gz{.tbi}__ files containing all reference genomes (Outgroup and Archaic) and observable samples with snps only (excluding indels, deletions etc.). The main reason of it is to avoid inconsistencies.
   
-* __output.txt__ is a  file 
+* __out.eu.txt__ and __out.eu.txt__ are  files 
 ```note
 [[[t_1,t_2], [t_3,t_4], [t_5,t_6]], [[t_2+1, t_3-1], [t_4+1, t_5-1]]]
 [[[t'_1,t'_2], [t'_3,t'_4], [t'_5,t'_6]], [[t'_2+1, t'_3-1], [t'_4+1, t'_5-1]]]
 ...
 ...
 ```
-where each two lines correspond to the one diploid sample from obs.samples.txt.
+where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries correspodenly.
 
 
 
