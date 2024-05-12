@@ -81,7 +81,11 @@ and  archaic samples
 
 Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
 
-Add full path to files  of 1000GP and three neanderthals to variables __$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ , change  variable and run 
+Add full path to files  of 1000GP and three neanderthals to variables
+
+__$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ ,
+
+change  variable and run 
 >./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
@@ -96,7 +100,9 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 >__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt__
 
 and to make observation files 
-__obs.neand.chr22.txt__, __obs.eu.chr22.txt__, __obs.na.chr${CHR}txt__, __obs.yri.chr${CHR}txt__ 
+
+__obs.neand.chr22.txt__, __obs.eu.chr22.txt__, __obs.na.chr22txt__, __obs.yri.chr22.txt__ 
+
 and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr${CHR}.txt. 
 
 
