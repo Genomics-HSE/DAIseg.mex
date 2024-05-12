@@ -13,7 +13,7 @@ __Output__: .txt files where each two lines corresponds to the one admixed(mexic
 
 
 # Pipeline briefly
-0. (optionally) Run __panel.preparation.mex.sh__ with samples' name files to merge 1000GP, neanderthal samples and obtain .vcf.gz file.
+0. (optionally) Run __panel.preparation.Linux.sh__ with samples' name files to merge 1000GP, neanderthal samples and obtain .vcf.gz file.
 1. Using .vcf.gz{.tbi} and files with samples's names to run __./make.obs.sh__ to make observation files.
 3. Run __daiseg.mex.py__ to obtain archaic tracts  with the posssibility of using EM algorithm.
 
