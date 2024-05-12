@@ -60,12 +60,12 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
   
 * __out.eu.txt__ and __out.eu.txt__ are  files 
 ```note
-[[[t_1,t_2], [t_3,t_4], [t_5,t_6]], [[t_2+1, t_3-1], [t_4+1, t_5-1]]]
-[[[t'_1,t'_2], [t'_3,t'_4], [t'_5,t'_6]], [[t'_2+1, t'_3-1], [t'_4+1, t'_5-1]]]
+[[t_1,t_2], [t_3,t_4], [t_5,t_6]]
+[[t'_1,t'_2], [t'_3,t'_4]]
 ...
 ...
 ```
-where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries correspodenly.
+where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file.
 
 
 
