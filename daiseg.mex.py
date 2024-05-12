@@ -4,14 +4,39 @@ import numpy as np
 import HMMmex as hmm
 import EMmex as EM
 import sys
+from functools import reduce
+from operator import xor
+from itertools import chain
 
 
+def intersections(a,b):
+    ranges = []
+    i = j = 0
+    while i < len(a) and j < len(b):
+        a_left, a_right = a[i]
+        b_left, b_right = b[j]
 
+        if a_right < b_right:
+            i += 1
+        else:
+            j += 1
 
+        if a_right >= b_left and b_right >= a_left:
+            end_pts = sorted([a_left, a_right, b_left, b_right])
+            middle = [end_pts[1], end_pts[2]]
+            ranges.append(middle)
+
+    ri = 0
+    while ri < len(ranges)-1:
+        if ranges[ri][1] == ranges[ri+1][0]:
+            ranges[ri:ri+2] = [[ranges[ri][0], ranges[ri+1][1]]]
+        ri += 1
+    return ranges
 
 parser = argparse.ArgumentParser(description='DAIseg') 
 
-parser.add_argument('--location', type=str, help='File with positions on chr')
+parser.add_argument('--location', type=str, help='File with first-last positions on chr')
+parser.add_argument('--gaps', type=str, help='File with gaps')
 
 parser.add_argument('--obs_eu', type=str, help='File with observations with respect to Europeans')
 parser.add_argument('--obs_na', type=str, help='File with observations with respect to Americans')
@@ -21,7 +46,8 @@ parser.add_argument('--obs_archaic', type=str, help='File with observations with
 parser.add_argument('--EM', type=str, help='Whether or not to use EM algorithm')
 
 parser.add_argument('--HMM_par', type= str, help='File with parameters')
-parser.add_argument('--o', type= str, help = 'Name of output file' )
+parser.add_argument('--o_eu', type= str, help = 'Outfile for european-neanderthal ancestry' )
+parser.add_argument('--o_na', type=str, help='Outfile for american-neanderthal ancestry')
 parser.add_argument('--EM_est', type= str, help = 'Make estimation of the all parameters or only coalescent times' )
 
 
@@ -36,6 +62,30 @@ with open(args.location,'r') as f1:
     seq_start, seq_end = f1.readline().split(' ')
     seq_start = int(seq_start)
     seq_end = int(seq_end.replace('\n',''))    
+    
+
+with open(args.gaps,'r') as f:
+    l=f.readline()
+m=l.replace('\n','').replace('[','').replace(']','').split(',')
+
+m=[[int(m[2*i]), int(m[2*i+1])] for i in range(int(len(m)/2))]
+
+    
+
+
+set2 = m
+set1 = [[seq_start, seq_end]]
+
+l = sorted((reduce(xor, map(set, chain(set1 , set2)))))
+XOR=[l[i:i + 2] for i in range(0, len(l), 2)]
+
+
+domain=intersections(XOR, set1)
+
+
+
+
+
     
 
 f = open(args.HMM_par, 'r')
@@ -158,6 +208,13 @@ if args.EM=='yes':
         
 
         
-with open(args.o, "w") as f:
-   for i in tracts_HMM_result:
-       f.write(str(i)+'\n') 
+with open(args.o_eu, "w") as f:
+   for idx in range(0, len(seq)):      
+
+       f.write(str(intersections(tracts_HMM_result[idx][1], domain))+'\n') 
+       
+with open(args.o_na, "w") as f:
+   for idx in range(0, len(seq)):
+       
+
+       f.write(str(intersections(tracts_HMM_result[idx][3], domain))+'\n') 

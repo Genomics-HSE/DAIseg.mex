@@ -121,7 +121,7 @@ with open('par.file.txt', "w") as file_pos:
     file_pos.write(str(MU)+'\n')
     file_pos.write(str(RR)+'\n')
     file_pos.write(str(L)+'\n')
-    file_pos.write(str(lines_yri[0,0])+' ' +str(lines_yri[-1,0])+'\n')
+#    file_pos.write(str(lines_yri[0,0])+' ' +str(lines_yri[-1,0])+'\n')
     file_pos.write(str( T_NEAND_AMH )+'\n')
     file_pos.write(str(T_OOF_AF)+'\n')
     file_pos.write(str( T_NEAND_migration )+'\n')
@@ -144,10 +144,11 @@ for ind in range(n_mex):
 SEQ=np.array(SEQ)
 
 
+with open('pos.chr'+str(CHR)+'.txt','w') as f:
+    f.write(str(lines_yri[0,0])+' ' +str(lines_yri[-1,0])+'\n')
 
 
-
-with open('obs.eu.txt', "w") as file1, open('obs.na.txt', "w") as file2, open('obs.yri.txt', "w") as file3,open('obs.neand.txt', "w") as file4:
+with open('obs.eu.chr'+str(CHR)+'.txt', "w") as file1, open('obs.na.chr'+str(CHR)+'.txt', "w") as file2, open('obs.yri.chr'+str(CHR)+'.txt', "w") as file3,open('obs.neand.chr'+str(CHR)+'.txt', "w") as file4:
     for j in range(len(SEQ[0])):
         s1, s2, s3, s4 = '','', '', ''
         for i in range(n_mex):
