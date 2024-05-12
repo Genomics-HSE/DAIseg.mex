@@ -171,7 +171,7 @@ bnds=((0.5*Lambda_0[5], 2*Lambda_0[5]), (0.5*Lambda_0[6], 2*Lambda_0[6]))
 
 def run_daiseg(lmbd_opt,seq, n_st, idx):
     d = MU * L       
-    lmbd_opt=Lambda_0        
+         
     a = hmm.initA(lmbd_opt[5]/d, lmbd_opt[6]/d, RR, L, lmbd_opt[7],  lmbd_opt[8],  lmbd_opt[9],  lmbd_opt[10])
     b=hmm.initB(MU, L, lmbd_opt[0:5], n_st) 
     tracts_HMM =  hmm.get_HMM_tracts(hmm.viterbi(seq [idx], P, a, b))
