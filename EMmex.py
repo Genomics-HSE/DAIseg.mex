@@ -377,7 +377,7 @@ def EM_common(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
 
     for i in range(em_steps):
 #        print('Step ', i, lmbd[0:7]/d*29)
-        lmbd_new = np.array(E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lambda_0, bnds))
+        lmbd_new = np.array(E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lmbd, bnds))
 
 
         if LNG.norm(lmbd_new-lmbd) < epsilon:
