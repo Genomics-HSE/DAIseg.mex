@@ -8,7 +8,7 @@ from functools import reduce
 from operator import xor
 from itertools import chain
 
-
+# two set of intervals intersection 
 def intersections(a,b):
     ranges = []
     i = j = 0
