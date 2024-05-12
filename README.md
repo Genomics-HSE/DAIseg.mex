@@ -95,21 +95,21 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 
 >__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt__
 
-and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__, __obs.yri.txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph). 
+and to make observation files __obs.neand.txt__, __obs.eu.txt__, __obs.na.txt__, __obs.yri.txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position. 
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->  python3 daiseg.mex.py  --location position.txt --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt --EM no --HMM_par par.file.txt  --o output.tracts.txt
+>   python3 daiseg.mex.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.txt --o_na out.na.txt
 
-where file par.file.txt was created on the previous Step. 
+par.file.txt with basic parameters is in directory. 
 
 ## Step 3 (optional) Run DAI.seg using EM algorithm
 
-par.file.txt obtained on the Step 1 could be used as the initial guess for EM algorithm.
+par.file.txt  could be used as the initial guess for EM algorithm.
 
 There are two possible options to estimate parameters: 
 
-> python daiseg.mex.py -location position.txt --obs_eu obs.eu.txt --obs_na obs.na.txt --obs_af obs.yri.txt --obs_archaic obs.neand.txt  --EM yes --HMM_par par.file.txt --o output.txt
+> python3 daiseg.mex.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes  --HMM_par par.file.txt --o_eu out.eu.txt --o_na out.na.txt
 
 to obtain estimations only for coalescent times 
 
