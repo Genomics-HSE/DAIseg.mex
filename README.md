@@ -95,7 +95,9 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 
 >__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt__
 
-and to make observation files __obs.neand.chr${CHR}.txt__, __obs.eu.chr${CHR}txt__, __obs.na.chr${CHR}txt__, __obs.yri.chr${CHR}txt__ and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr${CHR}.txt. 
+and to make observation files 
+__obs.neand.chr22.txt__, __obs.eu.chr22.txt__, __obs.na.chr${CHR}txt__, __obs.yri.chr${CHR}txt__ 
+and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr${CHR}.txt. 
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
