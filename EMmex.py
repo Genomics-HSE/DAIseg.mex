@@ -370,10 +370,10 @@ def E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lambda_old, bnds):
 
 
 
-def EM_common(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds):
+def EM_common(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds, em_steps):
     d=mut_rate * cut
     lmbd = np.array(lambda_0)
-    em_steps = 20
+
 
     for i in range(em_steps):
 #        print('Step ', i, lmbd[0:7]/d*29)

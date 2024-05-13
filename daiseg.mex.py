@@ -49,7 +49,7 @@ parser.add_argument('--HMM_par', type= str, help='File with parameters')
 parser.add_argument('--o_eu', type= str, help = 'Outfile for european-neanderthal ancestry' )
 parser.add_argument('--o_na', type=str, help='Outfile for american-neanderthal ancestry')
 parser.add_argument('--EM_est', type= str, help = 'Make estimation of the all parameters or only coalescent times' )
-
+parser.add_argument('--EM_steps', type=int, help='Number of steps in EM algorithm')
 
 
 args = parser.parse_args()
@@ -189,7 +189,7 @@ def EM_function(seq, lambda_0, n_st):
     return Lambda_new
     
 def EM2(seq, lambda_0,n_st):
-    return EM.EM_common(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds)
+    return EM.EM_common(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds, args.EM_steps)
 
 tracts_HMM_result = []
 if args.EM=='no':
