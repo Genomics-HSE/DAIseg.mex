@@ -42,7 +42,7 @@ done
 bcftools query -S ${mex}  -f '[%GT ]\n'  ${panelfinal} |sed  's/|/ /g' >  obs.chr${CHR}.ingroup.txt
 rm samples.*
 
-python3 obs.py ${CHR} chr${CHR}.${eu}.reference.txt chr${CHR}.${na}.reference.txt chr${CHR}.${af}.reference.txt chr${CHR}.${arch}.reference.txt obs.chr${CHR}.ingroup.txt
+python3 obs.py ${CHR} chr${CHR}.${eu}.reference.txt chr${CHR}.${na}.reference.txt chr${CHR}.${af}.reference.txt chr${CHR}.${arch}.reference.txt obs.chr${CHR}.ingroup.txt 
 
 for i in ${eu} ${na} ${af} ${arch} 
 do
