@@ -117,7 +117,7 @@ par.file.txt  could be used as the initial guess for EM algorithm.
 
 There are two possible options to estimate parameters: 
 
-> python3 daiseg.mex.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes  --HMM_par par.file.txt --o_eu out.eu.txt --o_na out.na.txt
+> python3 daiseg.mex.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes --EM_steps 3 --HMM_par par.file.txt --o_eu out.eu.txt --o_na out.na.txt
 
 to obtain estimations only for coalescent times 
 
