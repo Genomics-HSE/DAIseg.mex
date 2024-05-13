@@ -1,6 +1,6 @@
 #!/bin/bash
-CHR=22
-panelfinal=all.chr${CHR}.vcf.gz
+
+
 
 CHR=$1
 mex=$2
@@ -8,7 +8,7 @@ eu=$3
 na=$4
 af=$5
 arch=$6
-
+panelfinal=all.chr${CHR}.vcf.gz
 for i in ${eu} ${na} ${af} ${arch} 
 do
 	bcftools query -S $i  -f '%POS\n'   ${panelfinal} > $i.positions.txt # print number of postions in separate text file
