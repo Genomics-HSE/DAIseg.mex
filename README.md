@@ -86,7 +86,7 @@ Add full path to files  of 1000GP and three neanderthals to variables
 __$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ ,
 
 change  variable and run 
->./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt
+>./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt 
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
@@ -97,7 +97,7 @@ The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
 
->__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt__
+>__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt__  
 
 and to make observation files 
 
