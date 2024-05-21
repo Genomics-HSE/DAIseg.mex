@@ -113,14 +113,14 @@ and to make observation files
 
 __obs.neand.chr22.txt__, __obs.eu.chr22.txt__, __obs.na.chr22txt__, __obs.yri.chr22.txt__ 
 
-and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr${CHR}.txt. 
+and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
 >   python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt --location pos.chr22.txt --obs_eu obs.eu.chr6.txt --obs_na obs.na.chr6.txt --obs_af obs.yri.chr6.txt --obs_archaic obs.neand.chr6.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr6.txt --o_na out.na.chr6.txt
 
 par.file.txt with basic parameters is in directory.
---gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt is optional (if there are soe genome gaps in your desired region)
+--gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt is optional (if there are soe genome gaps in your desired region)
 
 ## Step 3 (optional) Run DAI.seg using EM algorithm
 
