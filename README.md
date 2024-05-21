@@ -55,6 +55,7 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 
 
 *  __all.chr22.vcf.gz{.tbi}__ files containing all reference genomes (Outgroup and Archaic) and observable samples with snps only (excluding indels, deletions etc.). The main reason of it is to avoid inconsistencies.
+
   
 * __out.eu.txt__ and __out.eu.txt__ are  files 
 ```note
@@ -65,6 +66,8 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 ```
 where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file respecting the order of admixed samples.
 
+
+
 * __ ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
   ```note
   position1 -1
@@ -72,6 +75,7 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
   position3 C
   ...
 ```
+
 
 
 *__gaps.by.pos.chr.22.txt__ is file with list of gaps
