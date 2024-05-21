@@ -65,10 +65,19 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 ```
 where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file respecting the order of admixed samples.
 
+* __ ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
+  ```note
+  position1 -1
+  position2 A
+  position3 C
+  ...
+```
 
 
-
-
+*__gaps.by.pos.chr.22.txt__ is file with list of gaps
+```note
+[[a,b], [c,d]. [e,f]]
+```
 ## Step 0. Merging 1000GP  and Archaic genomes
 Download 1000GP panel 
 >http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
@@ -105,9 +114,10 @@ and the file with default parameters and start-end positions __par.file.txt__ (s
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->   python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt --location pos.chr6.txt --obs_eu obs.eu.chr6.txt --obs_na obs.na.chr6.txt --obs_af obs.yri.chr6.txt --obs_archaic obs.neand.chr6.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr6.txt --o_na out.na.chr6.txt
+>   python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt --location pos.chr22.txt --obs_eu obs.eu.chr6.txt --obs_na obs.na.chr6.txt --obs_af obs.yri.chr6.txt --obs_archaic obs.neand.chr6.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr6.txt --o_na out.na.chr6.txt
 
-par.file.txt with basic parameters is in directory. 
+par.file.txt with basic parameters is in directory.
+--gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt is optional (if there are soe genome gaps in your desired region)
 
 ## Step 3 (optional) Run DAI.seg using EM algorithm
 
@@ -115,7 +125,7 @@ par.file.txt  could be used as the initial guess for EM algorithm.
 
 There are two possible options to estimate parameters: 
 
-> python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.6.txt --location pos.chr6.txt --obs_eu obs.eu.chr6.txt --obs_na obs.na.chr6.txt --obs_af obs.yri.chr6.txt --obs_archaic obs.neand.chr6.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr6.txt --o_na out.na.chr6.txt
+> python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr6.txt --obs_eu obs.eu.chr6.txt --obs_na obs.na.chr6.txt --obs_af obs.yri.chr6.txt --obs_archaic obs.neand.chr6.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr6.txt --o_na out.na.chr6.txt
 
 to obtain estimations only for coalescent times 
 
