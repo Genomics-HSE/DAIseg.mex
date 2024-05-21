@@ -78,7 +78,7 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
 
 * __gaps.by.pos.chr.22.txt__ is file with list of gaps
   ```note
-[[a,b], [c,d]. [e,f]]
+  [[a,b], [c,d]. [e,f]]
   ```
 
 ## Step 0. Merging 1000GP  and Archaic genomes
