@@ -69,7 +69,7 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
 
 
 * __ ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
-  ```note
+```note
   position1 -1
   position2 A
   position3 C
