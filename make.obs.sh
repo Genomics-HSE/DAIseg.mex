@@ -9,9 +9,9 @@ na=$4
 af=$5
 arch=$6
 aa=$7
+panelfinal=$8
 
-
-panelfinal=all.chr${CHR}.vcf.gz
+#panelfinal=all.chr${CHR}.vcf.gz
 for i in ${eu} ${na} ${af} ${arch} 
 do
 
