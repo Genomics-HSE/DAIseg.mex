@@ -3,18 +3,12 @@ import numpy as np
 import sys
 
 CHR=sys.argv[1]
-
-
-
-
-
-
 f_eu = sys.argv[2]
 f_na= sys.argv[3]
 f_yri = sys.argv[4]
 f_neand = sys.argv[5]
-
 f_obs = sys.argv[6]
+f_aa = sys.argv[7]
 
 
 
@@ -43,12 +37,14 @@ def make_obs(lines, lines_ref, L, ind,dc):
 
 
 
-
-with open('./Ancestral.Alleles.hg19/POS.AA.chr'+str(CHR)+'.txt','r') as f:
+with open(f_aa,'r') as f:
     l=f.readlines()
+ 
 dct={}
 for  i in l:
+    
     m=i.replace(',','').replace('[','').replace(']','').replace('\n','').split(' ')
+
     dct[int(m[0])]=int(m[1])
 
    

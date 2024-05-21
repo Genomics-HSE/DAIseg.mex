@@ -8,10 +8,15 @@ eu=$3
 na=$4
 af=$5
 arch=$6
+aa=$7
+
+
 panelfinal=all.chr${CHR}.vcf.gz
 for i in ${eu} ${na} ${af} ${arch} 
 do
+
 	bcftools query -S $i  -f '%POS\n'   ${panelfinal} > $i.positions.txt # print number of postions in separate text file
+
 	bcftools query -S $i  -f '[%GT]\n'  ${panelfinal}  |sed 's/[^0]//g'  | awk '{ print length }'> $i.0.txt # считаем количество ноликов в строке
 	bcftools query -S $i  -f '[%GT]\n'  ${panelfinal} |sed 's/[^1]//g'  | awk '{ print length }'> $i.1.txt # считаем количество единичек в строке
 	paste  $i.0.txt $i.1.txt > $i.al.spec.txt #join 
@@ -40,9 +45,12 @@ done
 
 
 bcftools query -S ${mex}  -f '[%GT ]\n'  ${panelfinal} |sed  's/|/ /g' >  obs.chr${CHR}.ingroup.txt
+
 rm samples.*
 
-python3 obs.py ${CHR} chr${CHR}.${eu}.reference.txt chr${CHR}.${na}.reference.txt chr${CHR}.${af}.reference.txt chr${CHR}.${arch}.reference.txt obs.chr${CHR}.ingroup.txt 
+echo ${aa}
+
+python3 obs.py ${CHR} chr${CHR}.${eu}.reference.txt chr${CHR}.${na}.reference.txt chr${CHR}.${af}.reference.txt chr${CHR}.${arch}.reference.txt obs.chr${CHR}.ingroup.txt ${aa}
 
 for i in ${eu} ${na} ${af} ${arch} 
 do
