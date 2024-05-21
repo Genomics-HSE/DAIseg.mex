@@ -80,19 +80,19 @@ seq0, seq1, seq2, seq3 = [], [], [], []
 with open(args.obs_eu, "r") as f0, open(args.obs_na, "r") as f1, open(args.obs_af, "r") as f2,open(args.obs_archaic, "r") as f3:
     for line0, line1, line2, line3 in zip(f0, f1, f2, f3):
     
-        row = line0.replace('\n','').split(' ')[0:4]
+        row = line0.replace('\n','').split(' ')
         row = [int(i) for i in row]
         seq0.append(row)
         
-        row = line1.replace('\n','').split(' ')[0:4]
+        row = line1.replace('\n','').split(' ')
         row = [int(i) for i in row]
         seq1.append(row)
         
-        row = line2.replace('\n','').split(' ')[0:4]
+        row = line2.replace('\n','').split(' ')
         row = [int(i) for i in row]
         seq2.append(row)
 
-        row = line3.replace('\n','').split(' ')[0:4]
+        row = line3.replace('\n','').split(' ')
         row = [int(i) for i in row]
         seq3.append(row)
 
