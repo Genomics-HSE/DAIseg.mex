@@ -58,17 +58,17 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 
   
 * __out.eu.txt__ and __out.eu.txt__ are  files 
-```note
+    ```note
 [[t_1,t_2], [t_3,t_4], [t_5,t_6]]
 [[t'_1,t'_2], [t'_3,t'_4]]
 ...
 ...
-```
+    ```
 where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file respecting the order of admixed samples.
 
 
 
-* __ ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
+* __ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
   ```note
   position1 -1
   position2 A
@@ -76,12 +76,11 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
   ...
   ```
 
-
-
 *__gaps.by.pos.chr.22.txt__ is file with list of gaps
   ```note
 [[a,b], [c,d]. [e,f]]
   ```
+
 ## Step 0. Merging 1000GP  and Archaic genomes
 Download 1000GP panel 
 >http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
