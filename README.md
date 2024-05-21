@@ -69,19 +69,19 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
 
 
 * __ ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
-```note
+  ```note
   position1 -1
   position2 A
   position3 C
   ...
-```
+  ```
 
 
 
 *__gaps.by.pos.chr.22.txt__ is file with list of gaps
-```note
+  ```note
 [[a,b], [c,d]. [e,f]]
-```
+  ```
 ## Step 0. Merging 1000GP  and Archaic genomes
 Download 1000GP panel 
 >http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
