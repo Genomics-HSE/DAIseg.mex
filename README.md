@@ -47,9 +47,9 @@ t_mex # time of modern admixture
 ```
 
 *  __position.txt__ first-last positions of desired region
-```note
-start_chr end_chr
-```
+ ```note
+ start_chr end_chr
+ ```
 
 By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to make  initiall guess for the EM algorithm on Step 2. These values are good to find archqic segments but using EM algorithm allows to find short segments.
 
