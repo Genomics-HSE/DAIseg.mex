@@ -13,7 +13,7 @@ __Output__: .txt files where each two lines corresponds to the one admixed(mexic
 
 
 # Pipeline briefly
- (optionally) Run __panel.preparation.Linux.sh__ with samples' name files to merge 1000GP, neanderthal samples and obtain .vcf.gz file (optionally). Using .vcf.gz{.tbi} and files with samples's names to run ./make.obs.sh to make observation files. Run daiseg.mex.py to obtain archaic tracts  with the posssibility of using EM algorithm.
+Run panel.preparation.Linux.sh with samples' name files to merge 1000GP, neanderthal samples and obtain .vcf.gz file (optionally). Using .vcf.gz{.tbi} and files with samples's names to run ./make.obs.sh to make observation files. Run daiseg.mex.py to obtain archaic tracts  with the posssibility of using EM algorithm.
 
 
 
@@ -46,7 +46,7 @@ t_mex # time of modern admixture
 0.1 # Portion of African ancestry
 ```
 
-*  __position.txt__ first-last positions in vcf
+*  __position.txt__ first-last positions of desired region
 ```note
 start_chr end_chr
 ```
@@ -63,7 +63,7 @@ By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to ma
 ...
 ...
 ```
-where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file.
+where each two lines correspond to the one diploid sample from mex.txt with European and Native American ancestries in each file respecting the order of admixed samples.
 
 
 
