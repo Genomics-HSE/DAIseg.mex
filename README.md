@@ -68,13 +68,14 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
 
 
 
-* __ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information")
+* __ancestral.alleles.file.txt__  file with information about ancestral allels ("-1"=="no information").
   ```note
   position1 -1
   position2 A
   position3 C
   ...
   ```
+  The link on the ancestral alles files based on hg19 is https://drive.google.com/file/d/1Vw-QEG9uu1trkbGHpDVXhMlbGt-RQhbN/view?usp=sharing
 
 * __gaps.by.pos.chr.22.txt__ is file with list of gaps
   ```note
