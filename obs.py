@@ -120,16 +120,6 @@ SEQ=[]
 N_ST=[]
 L=1000
 
-MU=1.25e-8
-RR=1e-8
-gen_time=29
-
-T_NEAND_migration = 55000 #time of Neanderthal migration into Out_of_africa population
-T_NEAND_AMH = 650000 # split time between AMH and Neanderthal
-T_OOF_AF = 65700 # Out_of_Africa migration time
-T_AS_EU_split = 41997 #Asian European split
-T_AS_NA_split = 17000 # time of crossing Beringian (Nielsen et al., 2017; Mendes et al., 2020)
-T_MEX_admix = 466 
 
        
 
