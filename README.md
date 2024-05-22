@@ -108,11 +108,11 @@ The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
 
->__./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt__  
+>./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
 
 and to make observation files 
 
-__obs.neand.chr22.txt__, __obs.eu.chr22.txt__, __obs.na.chr22txt__, __obs.yri.chr22.txt__ 
+obs.neand.chr22.txt__, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
 
 and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
 
