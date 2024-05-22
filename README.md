@@ -25,7 +25,7 @@ GM19129
 
 
 *  __par.file.txt__
-```note
+ ```note
 29 # years per generation
 1.25e-08    #mutation rate μ
 1e-08    #recombination rate
@@ -41,12 +41,12 @@ t_mex # time of modern admixture
 0.45 # portion of European ancestry
 0.45 # portion of American ancestry
 0.1 # Portion of African ancestry
-```
+ ```
 
 *  __position.txt__ first-last positions of desired region
- ```note
- start_chr end_chr
- ```
+    ```note
+    start_chr end_chr
+    ```
 
 By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to make  initiall guess for the EM algorithm on Step 2. These values are good to find archqic segments but using EM algorithm allows to find short segments.
 
