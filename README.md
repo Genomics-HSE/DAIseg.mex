@@ -114,7 +114,6 @@ and the file with default parameters and start-end positions __par.file.txt__ (s
 python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
 ```
 
-par.file.txt with basic parameters is in directory.
 
 --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt is optional (if there are some genome gaps in your desired region)
 
