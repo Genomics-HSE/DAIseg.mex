@@ -83,9 +83,7 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
   ```
 
 ## Step 0. Merging 1000GP  and Archaic genomes
-Download 1000GP panel from [here][1]
-
-and  archaic samples [Link1][2] and [Link2][3]
+Download [1000GP panel][1] and  archaic samples  [Link1][2] and [Link2][3]
 
 
 Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
