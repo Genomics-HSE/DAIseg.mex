@@ -84,11 +84,9 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
 
 ## Step 0. Merging 1000GP  and Archaic genomes
 Download 1000GP panel from [here][1]
->http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
 
-and  archaic samples 
->http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
->http://ftp.eva.mpg.de/neandertal/ChagyrskayaOkladnikov/
+and  archaic samples [Link1][2] and [Link2][3]
+
 
 Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
 
@@ -133,5 +131,7 @@ There are two possible options to estimate parameters:
 > python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
 
 [1]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
+[2]: http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
+[3]: http://ftp.eva.mpg.de/neandertal/ChagyrskayaOkladnikov/
 to obtain estimations only for coalescent times 
 
