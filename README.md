@@ -87,7 +87,9 @@ Download [1000GP panel][1] and  archaic samples  [Link1][2] and [Link2][3]. Make
 
 Add full path to files  of 1000GP,  Altai.Neanderthal, Vindija33.19, Chagyrskaya/Okladnikova to variables NAME1000 and n1, n2, n3 in  panel.preparation.*.sh and run 
 
->./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt 
+```bash
+./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt 
+```
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
@@ -97,6 +99,7 @@ The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 ## Step 1.  Make observations
 
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
+
 
 >./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
 
