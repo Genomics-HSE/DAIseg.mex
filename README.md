@@ -91,7 +91,7 @@ Add full path to files  of 1000GP,  Altai.Neanderthal, Vindija33.19, Chagyrskaya
 ./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt 
 ```
  
-The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
+The resulting vcf.gz file is all.chr22.vcf.gz{.tbi}
 
 
 
@@ -106,7 +106,7 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 
 and to make observation files 
 
-obs.neand.chr22.txt__, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
+obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
 
 and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
 
