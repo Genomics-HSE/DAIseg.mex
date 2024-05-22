@@ -112,7 +112,7 @@ python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location
 ```
 
 
---gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt is optional (if there are some genome gaps in your desired region)
+--gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt is optional (if there are some genome gaps in your desired region). File with gaps for hg19 could be found in GAPS.hg19 directory
 
 ## Step 3 (optional) Run DAI.seg using EM algorithm
 
