@@ -91,11 +91,10 @@ Add full path to files  of 1000GP,  Altai.Neanderthal, Vindija33.19, Chagyrskaya
 The resulting vcf.gz file is all.chr22.vcf.gz{.tbi}
 
 
-
-
 ## Step 1.  Make observations
 
-You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
+You need  vcf file, lists of samples __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__ and file with [ancestral alleles positions][4]
+ to run  
 
 ```bash
 ./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  all.chr22.vcf.gz
@@ -103,7 +102,7 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 
 and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
 
-and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
+and the file with default parameters  par.file.txt (see the File's summary paragraph) and file with start-end position pos.chr22.txt. 
 
 
 ## Step 2 Run DAI.seg without EM algorithm
