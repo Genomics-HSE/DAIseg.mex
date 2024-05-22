@@ -83,16 +83,10 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
   ```
 
 ## Step 0. Merging 1000GP  and Archaic genomes
-Download [1000GP panel][1] and  archaic samples  [Link1][2] and [Link2][3]
+Download [1000GP panel][1] and  archaic samples  [Link1][2] and [Link2][3]. Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
 
+Add full path to files  of 1000GP,  Altai.Neanderthal, Vindija33.19, Chagyrskaya/Okladnikova to variables NAME1000 and n1, n2, n3 in  panel.preparation.*.sh and run 
 
-Make .txt files with samples' names  __eu.txt__, __na.txt__, __yri.txt__ and __mex.txt__ and  __archaic.txt__
-
-Add full path to files  of 1000GP and three neanderthals to variables
-
-__$NAME1000__ and __$n1, $n2, $n3__ in  __panel.preparation.*.sh__ ,
-
-change  variable and run 
 >./panel.preparation.*.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt 
  
 The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
