@@ -7,9 +7,6 @@ Highly accurate method for detecting archaic segments in the modern admixed geno
 # DAIseg.mex
 DAIseg.mex method is created to detect ancient introgressed segments using unadmixed outgroup population and several reference archaic genomes. 
 
-__Input__: .vcf.gz{.tbi} file only with biallelic snps where merging all Neanderthal, Europeans, Native Americans, Africans and  ingroup observable samples together and five .txt files with ids of each group.
-
-__Output__: .txt files where each two lines corresponds to the one admixed(mexican) sample and is  array of tracts  : Neanderthal ancestry camed through Europeans, Neanderthal ancestry camed throug Native americans
 
 
 # Pipeline briefly
