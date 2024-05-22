@@ -25,10 +25,10 @@ GM19129
 
 
 *  __par.file.txt__
- ```note
-29 # years per generation
-1.25e-08    #mutation rate μ
-1e-08    #recombination rate
+   ```note
+   29 # years per generation
+   1.25e-08    #mutation rate μ
+   1e-08    #recombination rate
 1000    #window size
 t_arch^c    #Coalescent time of AMH and Neanderthals
 t_split^c    #Coalescent time out of Africa
@@ -41,7 +41,7 @@ t_mex # time of modern admixture
 0.45 # portion of European ancestry
 0.45 # portion of American ancestry
 0.1 # Portion of African ancestry
- ```
+    ```
 
 *  __position.txt__ first-last positions of desired region
     ```note
