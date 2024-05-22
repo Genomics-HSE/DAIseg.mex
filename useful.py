@@ -41,3 +41,20 @@ def exclude_gaps(set1, set2): #set2 is set of gaps [[],[],[]]
     XOR=[l[i:i + 2] for i in range(0, len(l), 2)]
 
     return intersections(XOR, set1)
+    
+    
+
+def point_in_set(p, m_a):
+    if m_a==[[]]:
+        return False
+    def point_in(p, a):
+        if p>=a[0] and p<=a[1]:
+            return True
+        else:
+            return False
+    f=False
+    for j in m_a:
+        f=point_in(p,j)
+        if f==True:
+            return f
+    return f

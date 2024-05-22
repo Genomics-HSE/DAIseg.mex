@@ -4,69 +4,20 @@ import random
 import numpy as np
 import random
 import sklearn
-
 import pandas as pd
 from numpy import linalg as LNG 
 from random import randint, randrange
-
-
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report 
-
-
 import seaborn
 import matplotlib
 from matplotlib import pyplot as plt
-
 import math
 import scipy
 import scipy.optimize as optimize
 from scipy.optimize import minimize
-
-
-
+import useful as usfl
 import HMMmex as hmm
-
-def point_in_set(p, m_a):
-    if m_a==[[]]:
-        return False
-    def point_in(p, a):
-        if p>=a[0] and p<=a[1]:
-            return True
-        else:
-            return False
-    f=False
-    for j in m_a:
-        f=point_in(p,j)
-        if f==True:
-            return f
-    return f
-
-
-
-def intersections(a,b):
-    ranges = []
-    i = j = 0
-    while i < len(a) and j < len(b):
-        a_left, a_right = a[i]
-        b_left, b_right = b[j]
-
-        if a_right < b_right:
-            i += 1
-        else:
-            j += 1
-
-        if a_right >= b_left and b_right >= a_left:
-            end_pts = sorted([a_left, a_right, b_left, b_right])
-            middle = [end_pts[1], end_pts[2]]
-            ranges.append(middle)
-
-    ri = 0
-    while ri < len(ranges)-1:
-        if ranges[ri][1] == ranges[ri+1][0]:
-            ranges[ri:ri+2] = [[ranges[ri][0], ranges[ri+1][1]]]
-        ri += 1
-    return ranges
 
 N=5
 
@@ -411,7 +362,7 @@ def EM_common(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds, em
 
 
     for i in range(em_steps):
-#        print('Step ', i, lmbd[0:7]/d*29)
+
         lmbd_new = np.array(E_step_common(cut, p, o_mas, n_states, mut_rate, rr,lmbd, bnds))
 
 
@@ -450,7 +401,7 @@ def alpha_scaled_opt_gaps(a,b, o, p, gaps):
     c[0] = 1 / sum(alpha[:, 0])
     alpha[:, 0] = alpha[:, 0] / sum(alpha[:, 0])
     for t in range(1, len(o)):   
-        if point_in_set(t, gaps)==True:
+        if usfl.point_in_set(t, gaps)==True:
 
             for i in range(0, N):
                 
@@ -477,7 +428,7 @@ def beta_scaled_opt_gaps(a,b, o, scaling_factors, gaps):
     
 
     for t in range(len(o)-2,-1,-1):        
-        if point_in_set(t, gaps)==True:
+        if usfl.point_in_set(t, gaps)==True:
             for i in range(0, N):             
                 for l in range(0, N):
                     beta[i, t] += a_gaps[i, l] * b_gaps[l][0] * beta[l, t+1]       
@@ -509,7 +460,7 @@ def def_ksi_gaps( a, b, o, alpha, beta, gaps):
     ksi = np.zeros((N, N, M-1))
     
     for t in range(0, M-1):
-        if point_in_set(t, gaps)==True:
+        if usfl.point_in_set(t, gaps)==True:
             denom = 0
             for i in range(0, N):
                 for j in range(0, N):
@@ -539,7 +490,7 @@ def new_lambda_mex_gaps(o, gamma, gaps):
         s+=j[1]-j[0]+1
     
     for t in range(1, len(o), 1):
-        if point_in_set(t, gaps)==False:
+        if usfl.point_in_set(t, gaps)==False:
             lmbd += o[t, 0] * ( gamma[0, t] + gamma[1, t]) + o[t, 1] * (gamma[2, t] + gamma[3, t]) + o[t, 2]  * gamma[4, t]     
         
     return lmbd/(len(o)-s-1)
@@ -552,7 +503,7 @@ def new_lambda_n(o, gamma,gaps):
         s+=j[1]-j[0]+1
     
     for t in range(1, len(o), 1):
-        if point_in_set(t, gaps)==False:
+        if usfl.point_in_set(t, gaps)==False:
             lmbd += o[t, 3] * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + o[t, 2] * (gamma[1, t] + gamma[3, t]) 
         
     return lmbd/ (len(o)-s-1)
@@ -562,7 +513,7 @@ def new_lambda_i(o, gamma, gaps):
     denom=0
     
     for t in range(1, len(o), 1, gaps):  
-        if point_in_set(t, gaps)==False: 
+        if usfl.point_in_set(t, gaps)==False: 
             nom += o[t, 3] * (gamma[1, t] + gamma[3, t])
             denom += gamma[1, t] + gamma[3, t]
         
@@ -572,7 +523,7 @@ def new_lambda_af(o, gamma, gaps):
     nom, denom = 0, 0
     
     for t in range(1, len(o), 1):   
-        if point_in_set(t, gaps)==False:
+        if usfl.point_in_set(t, gaps)==False:
             nom += o[t, 2] * ( gamma[0, t] + gamma[2, t]) + (o[t, 0] + o[t, 1]) * gamma[4, t]
             denom += gamma[0, t] + gamma[2, t]+ 2 * gamma[4, t]    
     
@@ -581,15 +532,120 @@ def new_lambda_af(o, gamma, gaps):
 def new_lambda_ea(o, gamma, gaps):
     nom, denom = 0, 0
     for t in range(1, len(o), 1):  
-        if point_in_set(t, gaps)==False:
+        if usfl.point_in_set(t, gaps)==False:
             nom += o[t, 1] * ( gamma[0, t] + gamma[1, t]) + o[t, 0]  * (gamma[2, t]+gamma[3,t])
             denom += gamma[0, t] + gamma[1, t] +  gamma[2, t] + gamma[3, t]
     
     return nom/ denom 
     
+
+  
+def new_lambda_mex_common_gaps(o_mas, gamma_mas, gaps):
+
+    s=0    
+    for j in gaps:
+        s+=j[1]-j[0]+1
+        
+    lmbd=0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):
+            if usfl.point_in_set(t, gaps)==False:
+                lmbd += o[t, 0] * ( gamma[0, t] + gamma[1, t]) + o[t, 1] * (gamma[2, t] + gamma[3, t]) + o[t, 2]  * gamma[4, t]     
+        
+    return lmbd/((len(o)-s-1)*len(o_mas))
+
+
+def new_lambda_n_common_gaps(o_mas, gamma_mas, gaps):
+
+    s=0    
+    for j in gaps:
+        s+=j[1]-j[0]+1
+
+    lmbd = 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):
+            if usfl.point_in_set(t, gaps)==False:
+                lmbd += o[t, 3] * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + o[t, 2] * (gamma[1, t] + gamma[3, t]) 
+        
+    return lmbd/ ((len(o)-s-1)*len(o_mas))
+
+def new_lambda_i_common_gaps(o_mas, gamma_mas, gaps):
+    nom=0
+    denom=0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]   
+        for t in range(1, len(o), 1):   
+            if usfl.point_in_set(t, gaps)==False:
+                nom += o[t, 3] * (gamma[1, t] + gamma[3, t])
+                denom += gamma[1, t] + gamma[3, t]
+    return nom / denom
+
+def new_lambda_af_common_gaps(o_mas, gamma_mas, gaps):
+    nom, denom = 0, 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i] 
+        for t in range(1, len(o), 1): 
+            if usfl.point_in_set(t, gaps)==False:  
+                nom += o[t, 2] * ( gamma[0, t] + gamma[2, t]) + (o[t, 0] + o[t, 1]) * gamma[4, t]
+                denom += gamma[0, t] + gamma[2, t]+ 2 * gamma[4, t]    
     
+    return nom/ denom
+
+def new_lambda_ea_common_gaps(o_mas, gamma_mas, gaps):
+    nom, denom = 0, 0
+    for i in range(len(o_mas)):
+        o=o_mas[i]
+        gamma=gamma_mas[i]
+        for t in range(1, len(o), 1):  
+            if usfl.point_in_set(t, gaps)==False:
+                nom += o[t, 1] * ( gamma[0, t] + gamma[1, t]) + o[t, 0]  * (gamma[2, t]+gamma[3,t])
+                denom += gamma[0, t] + gamma[1, t] +  gamma[2, t] + gamma[3, t]
     
-def E_step_common_gaps(cut, p, o_mas, n_states, mut_rate, rr,lambda_old, bnds, gaps):
+    return nom/ denom
+ 
+ 
+def new_a_common_gaps(coeff_a, lmbd_0, bnds, cut, mut_rate,rr):
+    d=cut* mut_rate
+    x0=[lmbd_0[5], lmbd_0[6]]
+    def multi_Q(x):
+        x=np.array(x)
+        Q=0            
+        a = hmm.initA(x[0]/d, x[1]/d, rr, cut, lmbd_0[7], lmbd_0[8], lmbd_0[9], lmbd_0[10])            
+
+
+
+        for ii in range(N):
+            for jj in range(N):
+                Q += math.log(a[ii,jj]) * coeff_a[ii,jj]
+
+        return -Q
+
+    def gradient_respecting_bounds(bounds, fun, eps=1e-8):
+        """bounds: list of tuples (lower, upper)"""
+        def gradient(x):
+            fx = fun(x)
+            grad = np.zeros(len(x))
+            for k in range(len(x)):
+                d = np.zeros(len(x))
+                d[k] = eps if x[k] + eps <= bounds[k][1] else -eps
+                grad[k] = (fun(x + d) - fx) / d[k]
+            return grad
+        return gradient
+
+    opt_result = scipy.optimize.minimize(multi_Q, x0,  bounds=bnds,  
+                                         jac=gradient_respecting_bounds(bnds, multi_Q),  
+                                         method="L-BFGS-B" )
+
+
+    return opt_result.x[0], opt_result.x[1]  
+    
+def E_step_common_gaps(cut, p, o_mas, n_states, mut_rate, rr,lambda_old, bnds, gaps, coal):
 
     d=mut_rate * cut
     gamma_mas, ks_mas=[], []    
@@ -612,22 +668,28 @@ def E_step_common_gaps(cut, p, o_mas, n_states, mut_rate, rr,lambda_old, bnds, g
         for i in range(N):
             for j in range(N):                
                 for t in range(len(o)-1):
-                    if point_in_set(t, gaps)==False:
+                    if usfl.point_in_set(t, gaps)==False:
                         coeff_a[i, j] += ks[i, j, t] 
+
+
+    if coal==True:    
+        return [new_lambda_i_common_gaps(o_mas, gamma_mas, gaps), new_lambda_n_common_gaps(o_mas, gamma_mas, gaps), 
+                new_lambda_af_common_gaps(o_mas, gamma_mas, gaps), 
+                new_lambda_ea_common_gaps(o_mas, gamma_mas,gaps),new_lambda_mex_common_gaps(o_mas, gamma_mas, gaps),
+                lambda_old[5], lambda_old[6],
+                lambda_old[7], lambda_old[8], lambda_old[9], lambda_old[10]]
+    else:
+        upd = new_a_common_gaps(coeff_a, lambda_old, bnds, cut, mut_rate,rr)
+        return [new_lambda_i_common_gaps(o_mas, gamma_mas, gaps), new_lambda_n_common_gaps(o_mas, gamma_mas, gaps), 
+                new_lambda_af_common_gaps(o_mas, gamma_mas, gaps), 
+                new_lambda_ea_common_gaps(o_mas, gamma_mas,gaps),new_lambda_mex_common_gaps(o_mas, gamma_mas, gaps), 
+                upd[0], upd[1], 
+                lambda_old[7], lambda_old[8], lambda_old[9], lambda_old[10]]
     
-#    upd = new_a(coeff_a, lambda_old, bnds, cut, mut_rate,rr)
-
-    
-    return [new_lambda_i_common(o_mas, gamma_mas), new_lambda_n_common(o_mas, gamma_mas), 
-            new_lambda_af_common(o_mas, gamma_mas), 
-            new_lambda_ea_common(o_mas, gamma_mas),new_lambda_mex_common(o_mas, gamma_mas), 
-#            upd[0], upd[1], 
-            lambda_old[5], lambda_old[6],
-            lambda_old[7], lambda_old[8], lambda_old[9], lambda_old[10]]
 
 
 
-def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds, em_steps, gaps):
+def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnds, em_steps, gaps, coal):
     d=mut_rate * cut
     lmbd = np.array(lambda_0)
 
@@ -635,9 +697,10 @@ def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut, bnd
     for i in range(em_steps):
 
 
-        lmbd_new = np.array(E_step_common_gaps(cut, p, o_mas, n_states, mut_rate, rr,lmbd, bnds, gaps))
+        lmbd_new = np.array(E_step_common_gaps(cut, p, o_mas, n_states, mut_rate, rr,lmbd, bnds, gaps, coal))
 
         print('Step',  LNG.norm(lmbd_new-lmbd))
+
         if LNG.norm(lmbd_new-lmbd) < epsilon:
             break
         lmbd = lmbd_new
