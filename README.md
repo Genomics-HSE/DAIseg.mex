@@ -101,9 +101,7 @@ You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, _
 ./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
 ```
 
-and to make observation files 
-
-obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
+and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
 
 and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
 
@@ -119,10 +117,7 @@ python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location
 
 ## Step 3 (optional) Run DAI.seg using EM algorithm
 
-par.file.txt  could be used as the initial guess for EM algorithm.
-
-There are two possible options to estimate parameters: 
-
+par.file.txt  could be used as the initial guess for EM algorithm. There are two possible options to estimate parameters: 
 
 ```bash
 python3 daiseg.mex.empty.py  --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes  --EM_steps 5  --HMM_par par.file.txt --o_eu out.eu.chr22.5.txt --o_na out.na.chr22.5.txt
