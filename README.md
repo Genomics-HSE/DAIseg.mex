@@ -98,7 +98,7 @@ The resulting vcf.gz file is all.chr22.vcf.gz{.tbi}
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
 
 ```bash
-./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
+./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  all.chr22.vcf.gz
 ```
 
 and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
@@ -106,7 +106,7 @@ and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr2
 and the file with default parameters and start-end positions __par.file.txt__ (see the File's summary paragraph) and file with start-end position __pos.chr22.txt. 
 
 
-## Step 2.0 Run DAI.seg without EM algorithm
+## Step 2 Run DAI.seg without EM algorithm
 
 ```bash
 python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
