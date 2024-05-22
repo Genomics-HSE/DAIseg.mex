@@ -100,8 +100,9 @@ The resulting vcf.gz file is __all.chr22.vcf.gz{.tbi}__
 
 You need  __all.chr22.vcf.gz{.tbi}__,  __outgroup.txt__, __observations.txt__, __archaic.txt__ to run  
 
-
->./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
+```bash
+./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  
+```
 
 and to make observation files 
 
@@ -111,7 +112,10 @@ and the file with default parameters and start-end positions __par.file.txt__ (s
 
 
 ## Step 2.0 Run DAI.seg without EM algorithm
->   python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
+
+```bash
+python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
+```
 
 par.file.txt with basic parameters is in directory.
 
@@ -123,7 +127,11 @@ par.file.txt  could be used as the initial guess for EM algorithm.
 
 There are two possible options to estimate parameters: 
 
-> python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
+
+```bash
+python3 daiseg.mex.empty.py --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM no  --HMM_par par.file.txt --o_eu out.eu.chr22.txt --o_na out.na.chr22.txt
+```
+
 
 [1]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
 [2]: http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
