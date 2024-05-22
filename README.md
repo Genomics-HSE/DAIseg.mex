@@ -125,7 +125,7 @@ There are two possible options to estimate parameters:
 
 
 ```bash
-python3 daiseg.mex.empty.py  --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes --EM_est coal --EM_steps 5  --HMM_par par.file.txt --o_eu out.eu.chr22.5.txt --o_na out.na.chr22.5.txt
+python3 daiseg.mex.empty.py  --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes  --EM_steps 5  --HMM_par par.file.txt --o_eu out.eu.chr22.5.txt --o_na out.na.chr22.5.txt
 ```
 to obtain estimations  of coalescent times.
 
