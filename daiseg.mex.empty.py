@@ -174,8 +174,8 @@ def run_daiseg(lmbd_opt,seq, n_st, idx, start):
 
 
 def EM2_gaps(seq, lambda_0,n_st):
-    if args.EM_est=='coal':
-        return EM.EM_common_gaps(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds, args.EM_steps, gaps_numbers, True)
+#    if args.EM_est=='coal':
+    return EM.EM_common_gaps(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds, args.EM_steps, gaps_numbers, True)
 #    else:
 #        return EM.EM_common_gaps(P, seq, n_st, MU, RR, Lambda_0, epsilon, L, bnds, args.EM_steps, gaps_numbers, False)
         
