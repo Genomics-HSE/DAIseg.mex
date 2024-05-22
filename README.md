@@ -17,11 +17,11 @@ Run panel.preparation.Linux.sh with samples' name files to merge 1000GP, neander
 
 # Files's summary
 *  __eu.txt__(European), __na.txt__(American), __af.txt__(African),  __archaic.txt__(Neanderthals)  and __mex.txt__(European), are .txt files which consist of the samples' ids of reference Africans, Neanderthals and observable Europeans written in a column
-```note
-NA18484
-NA18489
-GM19129
-```
+   ```note
+   NA18484
+   NA18489
+   GM19129
+   ```
 
 
 *  __par.file.txt__
@@ -29,18 +29,18 @@ GM19129
    29 # years per generation
    1.25e-08    #mutation rate μ
    1e-08    #recombination rate
-1000    #window size
-t_arch^c    #Coalescent time of AMH and Neanderthals
-t_split^c    #Coalescent time out of Africa
-t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
-t_ea^c # coalescent time of Europeans and Asians
-t_mex^c # modern coalescent time
-t_intr #introgression time
-t_mex # time of modern admixture
-0.025    #admixture proportion of archaic introgression
-0.45 # portion of European ancestry
-0.45 # portion of American ancestry
-0.1 # Portion of African ancestry
+   1000    #window size
+   t_arch^c    #Coalescent time of AMH and Neanderthals
+   t_split^c    #Coalescent time out of Africa
+   t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
+   t_ea^c # coalescent time of Europeans and Asians
+   t_mex^c # modern coalescent time
+   t_intr #introgression time
+   t_mex # time of modern admixture
+   0.025    #admixture proportion of archaic introgression
+   0.45 # portion of European ancestry
+   0.45 # portion of American ancestry
+   0.1 # Portion of African ancestry
     ```
 
 *  __position.txt__ first-last positions of desired region
