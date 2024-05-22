@@ -100,9 +100,7 @@ You need  vcf file, lists of samples __eu.txt__, __na.txt__, __yri.txt__ and __m
 ./make.obs.sh 22 mex.txt eu.txt na.txt yri.txt archaic.txt ancestral.alleles.file.txt  all.chr22.vcf.gz
 ```
 
-and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt
-
-and the file with default parameters  par.file.txt (see the File's summary paragraph) and file with start-end position pos.chr22.txt. 
+and to make observation files obs.neand.chr22.txt, obs.eu.chr22.txt, obs.na.chr22txt, obs.yri.chr22.txt.
 
 
 ## Step 2 Run DAI.seg without EM algorithm
