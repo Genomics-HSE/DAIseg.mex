@@ -72,7 +72,7 @@ where each two lines correspond to the one diploid sample from mex.txt with Euro
   position3 C
   ...
   ```
-  The link on the ancestral alles files based on hg19 is https://drive.google.com/file/d/1Vw-QEG9uu1trkbGHpDVXhMlbGt-RQhbN/view?usp=sharing
+  The link on the [ancestral alles files based on hg19][4] 
 
 * __gaps.by.pos.chr.22.txt__ is file with list of gaps
   ```note
@@ -127,10 +127,11 @@ There are two possible options to estimate parameters:
 ```bash
 python3 daiseg.mex.empty.py  --gaps ./GAPS.hg19/gaps.by.pos.chr.22.txt --location pos.chr22.txt --obs_eu obs.eu.chr22.txt --obs_na obs.na.chr22.txt --obs_af obs.yri.chr22.txt --obs_archaic obs.neand.chr22.txt --EM yes --EM_est coal --EM_steps 5  --HMM_par par.file.txt --o_eu out.eu.chr22.5.txt --o_na out.na.chr22.5.txt
 ```
-
+to obtain estimations  of coalescent times.
 
 [1]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
 [2]: http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
 [3]: http://ftp.eva.mpg.de/neandertal/ChagyrskayaOkladnikov/
-to obtain estimations only for coalescent times 
+[4]: https://drive.google.com/file/d/1Vw-QEG9uu1trkbGHpDVXhMlbGt-RQhbN/view?usp=sharing
+
 
