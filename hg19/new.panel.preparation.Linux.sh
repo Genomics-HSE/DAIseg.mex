@@ -1,18 +1,16 @@
 #!/bin/bash
 
 #change the following names and directories
-CHR=$1
-bed=$5
-NAME1000=$6
-n1=$7
-n2=$8
-n3=$9
-panel=${10}
 
-#NAME1000=/media/scglab/T7/Work/Data/1000GP/${CHR}/ALL.chr${CHR}.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz #name of the 1000GP vcf files
-#n1=/media/scglab/T7/Work/data/neand/33.19/chr${CHR}_mq25_mapab100.vcf.gz
-#n2=/media/scglab/T7/Work/data/neand/altai/chr${CHR}_mq25_mapab100.vcf.gz
-#n3=/media/scglab/T7/Work/data/neand/ChagyrskayaOkladnikov/split.${CHR}.vcf.gz
+
+CHR=$1
+bed=$6
+NAME1000=$7
+n1=$8
+n2=$9
+n3=${10}
+panel=${11}
+
 
 
 cat  $2 $3 $4 > samples.for.hmm.txt
