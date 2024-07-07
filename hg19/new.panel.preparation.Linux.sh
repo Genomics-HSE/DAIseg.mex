@@ -2,12 +2,12 @@
 
 #change the following names and directories
 CHR=$1
-bed=$4
-NAME1000=$5
-n1=$6
-n2=$7
-n3=$8
-panel=$9
+bed=$5
+NAME1000=$6
+n1=$7
+n2=$8
+n3=$9
+panel=${10}
 
 #NAME1000=/media/scglab/T7/Work/Data/1000GP/${CHR}/ALL.chr${CHR}.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz #name of the 1000GP vcf files
 #n1=/media/scglab/T7/Work/data/neand/33.19/chr${CHR}_mq25_mapab100.vcf.gz
@@ -15,22 +15,22 @@ panel=$9
 #n3=/media/scglab/T7/Work/data/neand/ChagyrskayaOkladnikov/split.${CHR}.vcf.gz
 
 
-cat $3 $2 > samples.for.hmm.txt
+cat  $2 $3 $4 > samples.for.hmm.txt
 
 echo "DAIseg: Extracting the positions of 1000GP..."
 bcftools query -R ${bed} -f '%CHROM\t%POS\n' ${NAME1000} > 1000GP.pos.chr22.txt
 
 
 echo "DAIseg: Extracts non-1000GP positions that has alternates in archaic..."
-bcftools query -T ^1000GP.pos.chr22.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n1} > 1.txt
-bcftools query -T ^1000GP.pos.chr22.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n2} > 2.txt
-bcftools query -T ^1000GP.pos.chr22.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n3} > 3.txt
+bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n1} > 1.txt
+bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n2} > 2.txt
+bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n3} > 3.txt
 
 #join extra positions
 cat 1.txt 2.txt 3.txt| sort -u >extra.pos.chr${CHR}.txt
 
 echo "DAIseg: join extra positions with 1000GP positions..."
-cat  1000GP.pos.chr22.txt extra.pos.chr22.txt|sort -u> positions.chr${CHR}.txt
+cat  1000GP.pos.chr${CHR}.txt extra.pos.chr${CHR}.txt|sort -u> positions.chr${CHR}.txt
 
 
 #restrict 
