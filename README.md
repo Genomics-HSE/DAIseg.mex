@@ -7,7 +7,9 @@ Highly accurate method for detecting archaic segments in the modern admixed geno
 # DAIseg.mex
 DAIseg.mex method is created to detect ancient introgressed segments using unadmixed outgroup population and several reference archaic genomes. 
 
-
+```bash
+ ./full.preparation.sh hg19 22 path.to/file.bed n1 n2 n3 1000GP path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/archaic name.out_vcf name.out_txt
+```
 
 # Pipeline briefly
 Run panel.preparation.Linux.sh with samples' name files to merge 1000GP, neanderthal samples and obtain .vcf.gz file (optionally). Using .vcf.gz{.tbi} and files with samples's names to run ./make.obs.sh to make observation files. Run daiseg.mex.py to obtain archaic tracts  with the posssibility of using EM algorithm.
