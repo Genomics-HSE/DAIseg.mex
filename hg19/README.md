@@ -32,7 +32,7 @@ Download [1000GP panel][1] and  archaic samples  [Link1][2] and [Link2][3]. Make
 Add full path to files  of 1000GP,  Altai.Neanderthal, Vindija33.19, Chagyrskaya/Okladnikova to parameters 1000GP and n1, n2, n3  and run 
 
 ```bash
-./new.panel.preparation.Linux.sh 22 .path.to/outgroup.list path.to/observables.list path.to/file.bed 1000GP n1 n2 n3 all.chr22.vcf.gz
+./new.panel.preparation.Linux.sh 22 path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/file.bed 1000GP n1 n2 n3 name.out.vcf.gz 
 ```
  
 The resulting vcf.gz file is all.chr22.vcf.gz{.tbi}
@@ -47,15 +47,13 @@ The resulting vcf.gz file is all.chr22.vcf.gz{.tbi}
 
 
 
-
-
 ## Make summary file 
 
-You need  vcf file, lists of samples obs.samples.txt, outgroup.txt, archaic.txt and file with ancestral alleles positions
+You need  vcf.gz file, lists of mex, europeans, americans, africans and file with ancestral alleles positions
  to run  
 
 ```bash
-./new.make.obs.sh 22 all.chr22.vcf.gz path.to/observables.list path.to/outgroup.list path.to/archaic.list ./Ancestral.Alleles/hg19.AA.chr22.txt path.to/file.bed
+./new.make.obs.sh 22 all.chr22.vcf.gz path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/archaic ./Ancestral.Alleles/hg19.AA.chr22.txt path.to/file.bed
 ```
 
 
