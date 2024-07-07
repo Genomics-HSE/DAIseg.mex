@@ -27,7 +27,7 @@ bcftools query -S ${mex}  -f '[%GT ]\n'  ${panelfinal} |sed  's/|/ /g'|sed 's|/|
 paste  positions.chr${CHR}.txt al.chr${CHR}.${eu} al.chr${CHR}.${na} al.chr${CHR}.${af} al.chr${CHR}.${arch} obs.chr${CHR}.${mex}> 3.chr${CHR}.txt
 
 
-printf '#POSITIONS\t#REF\t#ALT\t#OUTGROUP\t#ARCHAIC\t#OBSERVATIONS\n'>header.txt
+printf '#POSITIONS\t#REF\t#ALT\t#EU\t#NA\t#AF\t#ARCHAIC\t#MEX\n'>header.txt
 cat header.txt 3.chr${CHR}.txt > temp.allels.ref.and.obs.chr${CHR}.txt
 
 rm header.txt
