@@ -95,12 +95,15 @@ def main_read(file, f_aa): # return the dictionary with REF,ALT, Outgroup and Ar
         
     for i in range(1,len(lns)):
         m=lns[i].replace(' \n','').split('\t') 
-        out = [int(m[3][k])  for k in range(len(m[3])) if m[3][k]!='.']      
-        arch = [int(m[4][k])  for k in range(len(m[4])) if m[4][k] != '.']    
-        o=m[5].split(' ')
+        
+        eu = [int(m[3][k])  for k in range(len(m[3])) if m[3][k]!='.']      
+        na = [int(m[4][k])  for k in range(len(m[4])) if m[4][k] != '.']    
+        af=[int(m[5][k])  for k in range(len(m[5])) if m[5][k]!='.']  
+        arch=[int(m[6][k])  for k in range(len(m[6])) if m[6][k]!='.']  
+        o=m[7].split(' ')
         o = [int(o[j]) for j in range(len(o))]
    
-        nested_dict[int(m[0])]={'REF': m[1], 'ALT':m[2], 'Outgroup': out, 'Archaic': arch, 'Obs': o  }
+        nested_dict[int(m[0])]={'REF': m[1], 'ALT':m[2], 'EU': eu, 'NA':na, 'AF': af, 'Archaic': arch, 'Obs': o  }
 
     for j in dct_AA.keys():
         AA=dct_AA[j]

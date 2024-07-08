@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #change the following names and directories
-
-
 CHR=$1
 bed=$6
 NAME1000=$7
@@ -13,15 +11,18 @@ panel=${11}
 
 
 
-cat  $2 $3 $4 > samples.for.hmm.txt
+cat  $2 $3 $4 $5 > samples.for.hmm.txt
+
 
 echo "DAIseg: Extracting the positions of 1000GP..."
 bcftools query -R ${bed} -f '%CHROM\t%POS\n' ${NAME1000} > 1000GP.pos.chr22.txt
 
-
 echo "DAIseg: Extracts non-1000GP positions that has alternates in archaic..."
 bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n1} > 1.txt
+bcftools query -l ${n2}
+echo "..."
 bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n2} > 2.txt
+echo "..."
 bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n3} > 3.txt
 
 #join extra positions
@@ -30,11 +31,13 @@ cat 1.txt 2.txt 3.txt| sort -u >extra.pos.chr${CHR}.txt
 echo "DAIseg: join extra positions with 1000GP positions..."
 cat  1000GP.pos.chr${CHR}.txt extra.pos.chr${CHR}.txt|sort -u> positions.chr${CHR}.txt
 
-
 #restrict 
 bcftools view -R ${bed} -T positions.chr${CHR}.txt ${n1} -Oz -o filtered.snps.chr${CHR}.1.vcf.gz
+echo "..."
 bcftools view -R ${bed} -T positions.chr${CHR}.txt ${n2} -Oz -o filtered.snps.chr${CHR}.2.vcf.gz
+echo "..."
 bcftools view -R ${bed} -T positions.chr${CHR}.txt ${n3} -Oz -o filtered.snps.chr${CHR}.3.vcf.gz
+echo "..."
 tabix -p vcf filtered.snps.chr${CHR}.1.vcf.gz
 tabix -p vcf filtered.snps.chr${CHR}.2.vcf.gz
 tabix -p vcf filtered.snps.chr${CHR}.3.vcf.gz
@@ -99,7 +102,6 @@ rm temp.1000.chr${CHR}.*
 rm samples.for.hmm.txt
 rm archaic.merged.chr${CHR}.txt
 rm 1000GP.pos.chr${CHR}.txt
-
 
 
 
