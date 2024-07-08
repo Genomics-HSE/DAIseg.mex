@@ -15,7 +15,7 @@ cat  $2 $3 $4 $5 > samples.for.hmm.txt
 
 
 echo "DAIseg: Extracting the positions of 1000GP..."
-bcftools query -R ${bed} -f '%CHROM\t%POS\n' ${NAME1000} > 1000GP.pos.chr22.txt
+bcftools query -R ${bed} -f '%CHROM\t%POS\n' ${NAME1000} > 1000GP.pos.chr${CHR}.txt
 
 echo "DAIseg: Extracts non-1000GP positions that has alternates in archaic..."
 bcftools query -T ^1000GP.pos.chr${CHR}.txt -R ${bed} -i 'ALT!="."' -f '%CHROM\t%POS\n' ${n1} > 1.txt
@@ -71,7 +71,7 @@ tabix -p vcf 1.vcf.gz
 
 
 echo "DAIseg: The next goal is to obtain vcf with positions of 1000GP which are missed in archaic samples"
-grep -Fxf 1000GP.pos.chr22.txt archaic.merged.chr${CHR}.txt > int.txt
+grep -Fxf 1000GP.pos.chr${CHR}.txt archaic.merged.chr${CHR}.txt > int.txt
 bcftools view -R ${bed} -v snps -T ^int.txt -S samples.for.hmm.txt ${NAME1000} -Oz -o 2.vcf.gz
 tabix -p vcf 2.vcf.gz
 
