@@ -12,7 +12,7 @@ mex=$8
 eu=$9
 na=${10}
 af=${11}
-ach=${12}
+arch=${12}
 outfilevcf=${13}
 outtxt=${14}
 
