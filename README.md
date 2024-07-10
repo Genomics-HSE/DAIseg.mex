@@ -40,7 +40,7 @@ There are two options without EM-algorithm and with EM algorithm.
 
 
 ```bash
-python3 dai.seg.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM no --prepared_file ./hg19/name.out_txt --out_prefix out.chr --arch_cover ./hg19/arch.covering.chr22.txt
+python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM no --prepared_file ./hg19/name.out_txt --out_prefix out.chr --arch_cover ./hg19/arch.covering.chr22.txt
 ```
 
 
@@ -55,7 +55,7 @@ to obtain estimations of the  coalescent times and run DAIseg. Here par.file.txt
 
 
 
-[1]: https://github.com/Genomics-HSE/DAIseg/blob/main/File.types.md
+[1]: [here](https://github.com/Genomics-HSE/DAIseg/blob/main/File.types.md)
 [2]: https://github.com/Genomics-HSE/DAIseg/blob/main/hg19/README.md
 
 
