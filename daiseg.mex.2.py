@@ -86,7 +86,7 @@ for ind in range(n_eu):
 print(state_mas)
 SEQ=np.array(SEQ)
 N_st=SEQ.max()+1
-
+N_ST_mas=[max(state_mas[:, i])+1 for i in range(4)]
 
 #split observations by windows, removing gaps
 SEQ_mas=[]
