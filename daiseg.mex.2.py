@@ -84,7 +84,7 @@ for ind in range(n_eu):
     SEQ.append(sq)
     N_ST.append(n_st)
     
-print(state_mas)
+state_mas=np.array(state_mas)
 SEQ=np.array(SEQ)
 N_st=SEQ.max()+1
 N_ST_mas=[max(state_mas[:, i])+1 for i in range(4)]
