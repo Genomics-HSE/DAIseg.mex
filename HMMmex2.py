@@ -50,7 +50,7 @@ def initA(Ti, Tmex,r,L,a,b,c1,c2) -> np.array:
 
 def initB( lmbd, n_st) -> np.array: 
     
-    B = np.empty(shape=(5,n_st,n_st,n_st,n_st))
+    B = np.empty(shape=(5,n_st[1],n_st[2],n_st[3],n_st[4]))
     meani = lmbd[0]
     meann = lmbd[1]
     meanaf = lmbd[2]
@@ -60,11 +60,11 @@ def initB( lmbd, n_st) -> np.array:
 
 
     
-    Pi = np.empty(n_st)
-    Pea = np.empty(n_st)
-    Pmex = np.empty(n_st)
-    Paf=np.empty(n_st)
-    Pn=np.empty(n_st)
+    Pi = np.empty(n_st[3])
+    Pea = np.empty(max(n_st[0], n_st[1]))
+    Pmex = np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Paf=np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Pn=np.empty(max([n_st[2], n_st[3]]))
 
     
     Pi[0]=np.exp(-meani)
@@ -78,19 +78,27 @@ def initB( lmbd, n_st) -> np.array:
     summex=0
     sumaf=0
     sumn=0
-    
-    for i in range(1,n_st):
+
+    for i in range(1, n_st[3]):
         Pi[i]=Pi[i-1]*meani/i
-        Pea[i]=Pea[i-1]*meanea/i
+        sumi=sumi+Pi[i]
+
+    for i in range(1, max([n_st[0], n_st[1], n_st[2]])):
         Pmex[i]=Pmex[i-1]*meanmex/i
         Paf[i]=Paf[i-1]*meanaf/i
-        Pn[i]=Pn[i-1]*meann/i
-        
-        sumi=sumi+Pi[i]
-        sumea=sumea+Pea[i]
         summex=summex+Pmex[i]
         sumaf=sumaf+Paf[i]
+
+    for i in range(1, max(n_st[0], n_st[1])):
+        Pea[i]=Pea[i-1]*meanea/i
+        sumea=sumea+Pea[i]
+        
+    for i in range(1, max([n_st[2], n_st[3]])):
+        Pn[i]=Pn[i-1]*meann/i
         sumn=sumn+Pn[i]
+
+    
+
 
     Pea[0]=1-sumea
     Pi[0]=1-sumi
@@ -98,15 +106,16 @@ def initB( lmbd, n_st) -> np.array:
     Paf[0]=1-sumaf
     Pn[0]=1-sumn
     
-    for i in range(n_st): 
-        for j in range(n_st):
-            for k in range(n_st):
-                for t in range(n_st):
+    for i in range(n_st[0]): 
+        for j in range(n_st[1]):
+            for k in range(n_st[2]):
+                for t in range(n_st[3]):
                     B[0][i][j][k][t]=Pmex[i]*Pea[j]*Paf[k]*Pn[t]
                     B[1][i][j][k][t]=Pmex[i]*Pea[j]*Pn[k]*Pi[t]
                     B[2][i][j][k][t]=Pea[i]*Pmex[j]*Paf[k]*Pn[t]
                     B[3][i][j][k][t]=Pea[i]*Pmex[j]*Pn[k]*Pi[t]
                     B[4][i][j][k][t]=Paf[i]*Paf[j]*Pmex[k]*Pn[t]    
+
 
     return B
 
@@ -115,37 +124,54 @@ def initB( lmbd, n_st) -> np.array:
 
 def initB_arch_cover( lmbd, n_st, cover):
     
-    B = np.empty(shape=(N,n_st,n_st, n_st, n_st))
+    B = np.empty(shape=(N,n_st[0],n_st[1], n_st[2], n_st[3]))
     
     
     meani, meann, meanaf, meanea, meanmex, meani2, meann2 = lmbd[0], lmbd[1], lmbd[2], lmbd[3] , lmbd[4], lmbd[0]*cover, lmbd[1]*cover
     
+    Pi, Pi2 = np.empty(n_st[3]), np.empty(n_st[3])
+    Pea = np.empty(max(n_st[0], n_st[1]))
+    Pmex = np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Paf=np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Pn, Pn2=np.empty(max([n_st[2], n_st[3]])), np.empty(max([n_st[2], n_st[3]]))        
     
     
-    Pi,  Pn, Paf, Pea, Pmex, Pi2, Pn2 = [np.empty(n_st) for i in range(7)]
+
     Pi[0], Pn[0], Paf[0], Pea[0], Pmex[0], Pi2[0], Pn2[0] = np.exp(-meani), np.exp(-meann), np.exp(-meanaf), np.exp(-meanea), np.exp(-meanmex), np.exp(-meani2), np.exp(-meann2)
     sumi, sumaf, sumn, sumi2, sumn2, sumea, summex = [0 for i in range(7)]
 
-    
-    for i in range(1,n_st):
-        Pi[i], Pn[i], Paf[i], Pea[i], Pmex[i], Pi2[i], Pn2[i] = Pi[i-1]*meani/i, Pn[i-1]*meann/i, Paf[i-1]*meanaf/i, Pea[i-1]*meanea/i, Pmex[i-1]*meanmex/i, Pi2[i-1]*meani2/i, Pn2[i-1]*meann2/i
 
+    for i in range(1, n_st[3]):
+        Pi[i]=Pi[i-1]*meani/i
+        sumi=sumi+Pi[i]
+        Pi2[i]=Pi2[i-1]*meani2/i
+        sumi2=sumi2+Pi2[i]
+
+    for i in range(1, max([n_st[0], n_st[1], n_st[2]])):
+        Pmex[i]=Pmex[i-1]*meanmex/i
+        Paf[i]=Paf[i-1]*meanaf/i
+        summex=summex+Pmex[i]
+        sumaf=sumaf+Paf[i]
+
+    for i in range(1, max(n_st[0], n_st[1])):
+        Pea[i]=Pea[i-1]*meanea/i
+        sumea=sumea+Pea[i]
         
-        sumi += Pi[i]
-        sumaf += Paf[i]
-        sumea += Pea[i]
-        summex += Pmex[i]
-        sumn += Pn[i]
-        sumn2 += Pn2[i]
-        sumi2 += Pi2[i]
+    for i in range(1, max([n_st[2], n_st[3]])):
+        Pn[i]=Pn[i-1]*meann/i
+        sumn=sumn+Pn[i]
+        Pn2[i]=Pn2[i-1]*meann2/i
+        sumn2=sumn2+Pn2[i]
+
+
         
 
     Pi[0], Pn[0], Paf[0], Pea[0], Pmex[0], Pi2[0], Pn2[0]  = 1-sumi, 1-sumn, 1-sumaf, 1-sumea, 1-summex,  1-sumi2, 1-sumn2
     
-    for i in range(n_st): 
-        for j in range(n_st):
-            for k in range(n_st):
-                for t in range(n_st):
+    for i in range(n_st[0]): 
+        for j in range(n_st[1]):
+            for k in range(n_st[2]):
+                for t in range(n_st[3]):
                     B[0][i][j][k][t]=Pmex[i]*Pea[j]*Paf[k]*Pn2[t]
                     B[1][i][j][k][t]=Pmex[i]*Pea[j]*Pn[k]*Pi2[t]
                     B[2][i][j][k][t]=Pea[i]*Pmex[j]*Paf[k]*Pn2[t]
@@ -158,24 +184,22 @@ def initB_arch_cover( lmbd, n_st, cover):
 
 def initBwN( lmbd, n_st) -> np.array: 
     
-    B = np.empty(shape=(N,n_st,n_st,n_st))
-    meani = lmbd[0]
+    B = np.empty(shape=(N,n_st[0],n_st[1],n_st[2]))
+
     meann = lmbd[1]
     meanaf = lmbd[2]
     meanea =lmbd[3]
     meanmex =lmbd[4]
     
+    Pea = np.empty(max(n_st[0], n_st[1]))
+    Pmex = np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Paf=np.empty(max([n_st[0], n_st[1], n_st[2]]))
+    Pn=np.empty(max([n_st[2], n_st[3]]))
 
 
-    
-    Pi = np.empty(n_st)
-    Pea = np.empty(n_st)
-    Pmex = np.empty(n_st)
-    Paf=np.empty(n_st)
-    Pn=np.empty(n_st)
 
     
-    Pi[0]=np.exp(-meani)
+
     Pea[0]=np.exp(-meanea)
     Pmex[0]=np.exp(-meanmex)
     Paf[0]=np.exp(-meanaf)
@@ -186,29 +210,30 @@ def initBwN( lmbd, n_st) -> np.array:
     summex=0
     sumaf=0
     sumn=0
-    
-    for i in range(1,n_st):
-        Pi[i]=Pi[i-1]*meani/i
-        Pea[i]=Pea[i-1]*meanea/i
+
+
+    for i in range(1, max([n_st[0], n_st[1], n_st[2]])):
         Pmex[i]=Pmex[i-1]*meanmex/i
         Paf[i]=Paf[i-1]*meanaf/i
-        Pn[i]=Pn[i-1]*meann/i
-        
-        sumi=sumi+Pi[i]
-        sumea=sumea+Pea[i]
         summex=summex+Pmex[i]
         sumaf=sumaf+Paf[i]
+
+    for i in range(1, max(n_st[0], n_st[1])):
+        Pea[i]=Pea[i-1]*meanea/i
+        sumea=sumea+Pea[i]
+        
+    for i in range(1, max([n_st[2], n_st[3]])):
+        Pn[i]=Pn[i-1]*meann/i
         sumn=sumn+Pn[i]
 
     Pea[0]=1-sumea
-    Pi[0]=1-sumi
     Pmex[0]=1-summex
     Paf[0]=1-sumaf
     Pn[0]=1-sumn
     
-    for i in range(n_st): 
-        for j in range(n_st):
-            for k in range(n_st):                
+    for i in range(n_st[0]): 
+        for j in range(n_st[1]):
+            for k in range(n_st[2]):                
                 B[0][i][j][k]=Pmex[i]*Pea[j]*Paf[k]
                 B[1][i][j][k]=Pmex[i]*Pea[j]*Pn[k]
                 B[2][i][j][k]=Pea[i]*Pmex[j]*Paf[k]

@@ -67,7 +67,7 @@ for ind in range(n_eu):
     o_na=usfl.make_obs_ref(dict_all, domain, ind, L,  'NA'),
     o_af=usfl.make_obs_ref(dict_all, domain, ind, L,  'AF')
     o_nd=usfl.make_obs_ref(dict_all, domain, ind, L,  'Archaic')
-
+    print(type(o_na))
     
     sq=np.vstack([o_eu, o_na, o_af, o_nd])
 

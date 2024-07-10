@@ -10,7 +10,7 @@ import useful2 as usfl
 
 N=5
 # each window is covered by cover[t] parameter which in [-0.001...0.999]. Cover_cut remove windows with low covering and transforms method to Skov. 
-cover_cut = 0.6 
+cover_cut = 0.5 
 
 #transitions and emissions in case of gaps in observable chromosome (centromeres/telomeres), not archaic gaps. 
 a_gaps=np.identity(N)
@@ -22,12 +22,9 @@ def alpha_scaled_opt_gaps(a,b, b_mas, o, p, gaps, cover):
     c = np.zeros(len(o)) #scaling factors, которые как раз позволяют не обнулиться
     
     alpha = np.zeros((N, len(o)))
-    
 
-        
-    
     if cover[0]>cover_cut:
-        alpha[:,0] = b_mas[int(cover[0]*10),i, o[0][0],o[0][1], o[0][2], o[0][3]]     
+        alpha[:,0] = b_mas[int(cover[0]*10)-int(cover_cut*10),i, o[0][0],o[0][1], o[0][2], o[0][3]]     
     else:
         alpha[:, 0] = b[:, o[0][0],o[0][1],o[0][2]] * p
     
@@ -43,18 +40,22 @@ def alpha_scaled_opt_gaps(a,b, b_mas, o, p, gaps, cover):
 
         else:
             if cover[t] > cover_cut:
-                alpha[i, t] = np.dot(alpha[:, t-1],a[:,i]) * b_mas[int(cover[t]*10),i, o[t][0],o[t][1], o[t][2], o[t][3]]    
+                for i in range(0, N):  
+                    alpha[i, t] = np.dot(alpha[:, t-1],a[:,i]) * b_mas[int(cover[t]*10)-int(cover_cut*10),i, o[t][0],o[t][1], o[t][2], o[t][3]]   
+
     
             else:
         
                 for i in range(0, N):            
                     alpha[i, t] = np.dot(alpha[:, t-1],a[:,i]) * b[i, o[t][0],o[t][1],o[t][2]] 
             
-        c[t] = 1 / sum(alpha[:,t]) #сохраняем множители        
-        alpha[:, t] = alpha[:, t] / sum(alpha[:,t])     
+        c[t] = 1 / sum(alpha[:,t]) #сохраняем множители      
 
+            
+        alpha[:, t] = alpha[:, t] / sum(alpha[:,t])     
         
-        
+
+
         
     return alpha, c
 
@@ -72,9 +73,12 @@ def beta_scaled_opt_gaps(a,b, b_mas, o, scaling_factors, gaps, cover):
             for i in range(0, N):             
                 for l in range(0, N):
                     beta[i, t] += a_gaps[i, l] * b_gaps[l][0] * beta[l, t+1]       
-        else: 
+        else:
+
             if cover[t+1] > cover_cut:
-                beta[i, t] += a[i, l] * b_mas[int(cover[t+1]*10),l, o[t+1][0],o[t+1][1], o[t+1][2],o[t+1][3]] * beta[l, t+1]
+                for i in range(0, N):             
+                    for l in range(0, N):
+                        beta[i, t] += a[i, l] * b_mas[int(cover[t+1]*10)-int(cover_cut*10),l, o[t+1][0],o[t+1][1], o[t+1][2],o[t+1][3]] * beta[l, t+1]
                 
             
             else:    
@@ -166,7 +170,7 @@ def new_lambda_af_common_gaps(o_mas, gamma_mas, gaps):
             if usfl.point_in_set(t, gaps)==False:  
                 nom += o[t, 2] * ( gamma[0, t] + gamma[2, t]) + (o[t, 0] + o[t, 1]) * gamma[4, t]
                 denom += gamma[0, t] + gamma[2, t]+ 2 * gamma[4, t]    
-    print('af',denom)
+
     
     return nom/ denom
 
@@ -179,7 +183,7 @@ def new_lambda_ea_common_gaps(o_mas, gamma_mas, gaps):
             if usfl.point_in_set(t, gaps)==False:
                 nom += o[t, 1] * ( gamma[0, t] + gamma[1, t]) + o[t, 0]  * (gamma[2, t]+gamma[3,t])
                 denom += gamma[0, t] + gamma[1, t] +  gamma[2, t] + gamma[3, t]
-    print('ea', denom)
+
     return nom/ denom
  
  
@@ -253,9 +257,12 @@ def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover):
 
     a = HMM.initA(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])    
     
-    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, 0.1+i*0.1) for i in range(10)])
+    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*0.1) for i in range(5)])
+
     
     b_Skov = HMM.initBwN(lambd_old[0:5], n_st)
+
+        
 
     
 
@@ -268,23 +275,18 @@ def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover):
 
 
         GAMMA.append(gamma)       
+
         
-        print(min(alpha[0,:]))
-        print(min(alpha[1,:]))
-        print(min(alpha[2,:]))
-        print(min(alpha[3,:]))
-        print(min(alpha[4,:]))
         
-        break
         
     
 
-#    return  [new_lambda_i_common_gaps(O, GAMMA, gaps, cover),new_lambda_n_common_gaps(O, GAMMA, gaps, cover), 
-#                new_lambda_af_common_gaps(O, GAMMA, gaps), 
-#                new_lambda_ea_common_gaps(O, GAMMA,gaps),
-#                new_lambda_mex_common_gaps(O, GAMMA, gaps),
-#                lambd_old[5], lambd_old[6],
-#                lambd_old[7], lambd_old[8], lambd_old[9], lambd_old[10]] 
+    return  [new_lambda_i_common_gaps(O, GAMMA, gaps, cover),new_lambda_n_common_gaps(O, GAMMA, gaps, cover), 
+                new_lambda_af_common_gaps(O, GAMMA, gaps), 
+                new_lambda_ea_common_gaps(O, GAMMA,gaps),
+                new_lambda_mex_common_gaps(O, GAMMA, gaps),
+                lambd_old[5], lambd_old[6],
+                lambd_old[7], lambd_old[8], lambd_old[9], lambd_old[10]] 
                 
                 
                 
