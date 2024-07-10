@@ -301,7 +301,7 @@ def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut,  em
         lmbd_new = np.array(E_step_gaps(cut, p, o_mas, n_states, mut_rate, rr,lmbd,  gaps, cover))
         
 
-        break
+        
 
         if LNG.norm(lmbd_new-lmbd) < epsilon:
             break
