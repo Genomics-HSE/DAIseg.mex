@@ -147,7 +147,7 @@ if args.EM=='no':
     
     
 if args.EM=='yes': 
-    Lambda_opt = EM_gaps(SEQ[0:1], Lambda_0, N_st, cover)    
+    Lambda_opt = EM_gaps(SEQ, Lambda_0, N_ST_mas, cover)    
     Tracts_HMM_mas = run_daiseg_all(Lambda_opt)    
  
  
