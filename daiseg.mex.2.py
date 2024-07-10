@@ -32,6 +32,7 @@ epsilon=1e-10
 
 P=[0.4,0.05, 0.4, 0.05, 0.1]
 d=MU*L
+cover_cut=0.5
 
 #read the windows archaic covering 
 with open(args.arch_cover,'r') as f:
