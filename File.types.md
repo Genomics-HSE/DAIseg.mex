@@ -39,28 +39,36 @@
   ```
   
 *  __par.file.txt__
+  
    ```note
    29 # years per generation
    1.25e-08    #mutation rate μ
    1e-08    #recombination rate
    1000    #window size
    t_arch^c    #Coalescent time of AMH and Neanderthals
-   t_split^c    #Coalescent time out of Africa 
+   t_split^c    #Coalescent time out of Africa
    t_intr^c    #coalescent time of archaic segments in modern genome with neanderthal samples
-   t_intr #introgression time 
+   t_ea^c # coalescent time of Europeans and Asians
+   t_mex^c # modern coalescent time
+   t_intr #introgression time
+   t_mex # time of modern admixture
    0.025    #admixture proportion of archaic introgression
-     ```
+   0.45 # portion of European ancestry
+   0.45 # portion of American ancestry
+   0.1 # Portion of African ancestry
+    ```
 
 
      By default, the  time values are  550.000, 70.000, 55.000, 55.000 are used to make  initiall guess for the EM algorithm on Step 2. These values are good to find archqic segments but using EM algorithm allows to find short segments.
 
 * __allels.ref.and.obs.chr22.txt__ is a file with all needed informations such as REF/ALT alleles, Ancestral Allele, Outgroup and Archaic Alleles, and Observations (haplotypes are written in columns )
      ```note
-     #POSITIONS	#REF	#ALT	ANCESTRAL	#OUTGROUP	#ARCHAIC	#OBSERVATIONS
-     16050075	A	G	.	0	.	0 0
-     16050115	G	A	.	1,0	.	0 0
-     ...
-     21954214	C	T	0	0	0	0 0
+    #POSITIONS	#REF	#ALT	#EU	#NA	#AF	#ARCHAIC	#MEX
+    16050075	A	G	.	0	0	0	.	0 0 0 0 0 0
+    17066684	C	T	0	0	0	0	.	0 0 0 0 0 0
+    17066700	T	C	0	1,0	1,0	1,0	.	0 0 0 0 1 0
+    17066711	C	T	0	0	0	0	.	0 0 0 0 0 0
+    17066732	C	T	0	0	0	0	.	0 0 0 0 0 0
      ```
 
 * __arch.covering.chr22.txt__ file with window covering by neanderthals (-0.001 means that there is no information in this window, 1.0 means the there is some information in each positions of the window from at least one archaic sample )
