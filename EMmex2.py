@@ -251,22 +251,21 @@ def new_lambda_i_common_gaps(o_mas, gamma_mas, gaps, cover):
     
     
     
-def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover):
+def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover, matrix_type):
 
     d=mu*cut
 
-    a = HMM.initA(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])    
+    if matrix_type=='simple':
+
+        a = HMM.initA(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])    
+    else:
+        a = HMM.initA2(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])  
     
     b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*0.1) for i in range(5)])
 
     
     b_Skov = HMM.initBwN(lambd_old[0:5], n_st)
 
-        
-
-    
-
-    
     GAMMA=[]
     for o in O:
         alpha, sc_factors = alpha_scaled_opt_gaps(a,b_Skov, b_our_mas, o, p, gaps, cover)
@@ -290,7 +289,7 @@ def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover):
                 
                 
                 
-def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut,  em_steps, gaps, cover):
+def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut,  em_steps, gaps, cover, matrix_type):
     d=mut_rate * cut
     lmbd = np.array(lambda_0)
 
@@ -298,13 +297,10 @@ def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut,  em
     for i in range(em_steps):
 
 
-        lmbd_new = np.array(E_step_gaps(cut, p, o_mas, n_states, mut_rate, rr,lmbd,  gaps, cover))
+        lmbd_new = np.array(E_step_gaps(cut, p, o_mas, n_states, mut_rate, rr,lmbd,  gaps, cover, matrix_type))
         
-
-        
-
         if LNG.norm(lmbd_new-lmbd) < epsilon:
             break
         lmbd = lmbd_new
-
+    print(i)
     return lmbd

@@ -17,6 +17,8 @@ parser.add_argument('--EM_est', type= str, help = 'Make estimation of the all pa
 parser.add_argument('--prepared_file', type=str, help='dlkfjgljk')
 parser.add_argument('--arch_cover', type=str)
 parser.add_argument('--obs_samples', type=str, help='File with samples names')
+
+parser.add_argument('--transition_matrix', type=str, help='Chose the type of transition matrix')
 args = parser.parse_args()
 
 
@@ -117,8 +119,10 @@ def run_daiseg(lmbd_opt,seq, n_st, idx, start, ar_cover, a, b_our_mas, b_Skov):
 
 def run_daiseg_all(lmbd_0):
 
-    A = HMM.initA(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])    
-
+    if args.transition_matrix=='simple':
+        A = HMM.initA(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])    
+    else:
+        A = HMM.initA2(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])
     
     B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*0.1) for i in range(10)])
     B_Skov = HMM.initBwN(lmbd_0[0:5], N_ST_mas)
@@ -143,7 +147,7 @@ def run_daiseg_all(lmbd_0):
 
     
 def EM_gaps(seq, lambda_0, n_st, cover):
-    return EM.EM_common_gaps(P, seq, n_st, MU, RR, lambda_0, epsilon, L, int(args.EM_steps), gaps_numbers, cover )   
+    return EM.EM_common_gaps(P, seq, n_st, MU, RR, lambda_0, epsilon, L, int(args.EM_steps), gaps_numbers, cover, args.transition_matrix )   
     
 
 if args.EM=='no': 
