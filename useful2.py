@@ -180,7 +180,44 @@ def make_obs_ref(nested_dict, domain, ind, L,  ref):
                 obs_ref[j]+=1
         else:
             if nested_dict[k]['Obs'][ind] not in nested_dict[k][ref] and len(nested_dict[k][ref])!=0 and nested_dict[k]['Obs'][ind]!=nested_dict[k]['AA']:
+                
                 obs_ref[j]+=1
+    
 
     return np.array(obs_ref)
-      
+
+
+
+def read_out(file):
+    with open(file, 'r') as f:
+        l=f.readlines()
+
+    l=[l[i].split('\t') for i in range(len(l))]
+    l=[l[i][2] for i in range(len(l))]
+
+    nd_HMM_tracts=[]
+    for j in range(len(l)):
+        m1=[]
+        l2=l[j].replace('[[','').replace(']]','').replace('\n','').split('], [')
+        for j1 in range(len(l2)):
+            if len(l2[j1])>2:
+                m2=l2[j1].split(', ')
+                m2=[int(m2[j2]) for j2 in range(len(m2))]
+            else:
+                m2=[]
+            m1.append(m2)
+        nd_HMM_tracts.append(m1)
+    return nd_HMM_tracts
+
+
+def daiseg_mex_tracts(prefix, n_mexicans):
+    tr_hmm_eu, tr_hmm_nd_eu, tr_hmm_na, tr_hmm_nd_na, tr_hmm_af= [],[], [], [], []
+    for idx in range(n_mexicans):
+        tr_hmm_eu.append(read_out(str(prefix)+'.modern.eu.txt')[idx])
+        tr_hmm_nd_eu.append(read_out(str(prefix)+'.neand.eu.txt')[idx])
+        tr_hmm_na.append(read_out(str(prefix)+'.modern.na.txt')[idx])
+        tr_hmm_nd_na.append(read_out(str(prefix)+'.neand.na.txt')[idx])
+        tr_hmm_af.append(read_out(str(prefix)+'.af.txt')[idx])
+    
+
+    return tr_hmm_eu, tr_hmm_nd_eu, tr_hmm_na, tr_hmm_nd_na, tr_hmm_af

@@ -74,7 +74,7 @@ for ind in range(n_eu):
 
     state_mas.append([max(o_eu), max(o_na), max(o_af), max(o_nd)])
     
-    
+
 #    sq=np.vstack([usfl.make_obs_ref(dict_all, domain, ind, L,  'EU'), usfl.make_obs_ref(dict_all, domain, ind, L,  'NA'), usfl.make_obs_ref(dict_all, domain, ind, L,  'AF'), usfl.make_obs_ref(dict_all, domain, ind, L,  'Archaic')])
     
     sq=sq.transpose()
@@ -83,7 +83,8 @@ for ind in range(n_eu):
     
     SEQ.append(sq)
     N_ST.append(n_st)
-    
+
+
 state_mas=np.array(state_mas)
 SEQ=np.array(SEQ)
 N_st=SEQ.max()+1
@@ -133,10 +134,13 @@ def run_daiseg_all(lmbd_0):
             for j in range(N):   
                for k in tr[j]:             
                    tracts_HMM[j].append( k )
+                
  
 
         tracts_HMM_mas.append([tracts_HMM[j] for j in range(N)])
+    
     return tracts_HMM_mas
+
     
 def EM_gaps(seq, lambda_0, n_st, cover):
     return EM.EM_common_gaps(P, seq, n_st, MU, RR, lambda_0, epsilon, L, int(args.EM_steps), gaps_numbers, cover )   
@@ -144,6 +148,7 @@ def EM_gaps(seq, lambda_0, n_st, cover):
 
 if args.EM=='no': 
     Tracts_HMM_mas = run_daiseg_all(Lambda_0)  
+
     
     
 if args.EM=='yes': 
@@ -173,10 +178,33 @@ with open(args.out_prefix+'.neand.na.txt', "w") as f:
            f.write(names[int(i // 2)]+'\t0\t'+str(Tracts_HMM_mas[i][3])+'\n')
        else:
            f.write(names[int(i // 2)]+'\t1\t'+str(Tracts_HMM_mas[i][3])+'\n')         
+
+
+#write into file arg.o results #Sample #Haplotype_number #Archaic tracts
+with open(args.out_prefix+'.modern.eu.txt', "w") as f:
+   for i in range(len(Tracts_HMM_mas)):
+       if i % 2 ==0:
+           f.write(names[int(i // 2)]+'\t0\t'+str(Tracts_HMM_mas[i][0])+'\n')
+       else:
+           f.write(names[int(i // 2)]+'\t1\t'+str(Tracts_HMM_mas[i][0])+'\n')      
+ 
         
+
+
+
+with open(args.out_prefix+'.modern.na.txt', "w") as f:
+   for i in range(len(Tracts_HMM_mas)):
+       if i % 2 ==0:
+           f.write(names[int(i // 2)]+'\t0\t'+str(Tracts_HMM_mas[i][2])+'\n')
+       else:
+           f.write(names[int(i // 2)]+'\t1\t'+str(Tracts_HMM_mas[i][2])+'\n')            
         
-        
-        
+with open(args.out_prefix+'.af.txt', "w") as f:
+   for i in range(len(Tracts_HMM_mas)):
+       if i % 2 ==0:
+           f.write(names[int(i // 2)]+'\t0\t'+str(Tracts_HMM_mas[i][4])+'\n')
+       else:
+           f.write(names[int(i // 2)]+'\t1\t'+str(Tracts_HMM_mas[i][4])+'\n')        
         
         
         
