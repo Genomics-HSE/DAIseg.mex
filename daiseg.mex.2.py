@@ -34,7 +34,7 @@ epsilon=1e-10
 
 P=[0.4,0.05, 0.4, 0.05, 0.1]
 d=MU*L
-cover_cut=0.5
+cover_cut=0.8
 
 #read the windows archaic covering 
 with open(args.arch_cover,'r') as f:
@@ -119,19 +119,22 @@ def run_daiseg(lmbd_opt,seq, n_st, idx, start, ar_cover, a, b_our_mas, b_Skov):
 
 def run_daiseg_all(lmbd_0):
 
+    
+
     if args.transition_matrix=='simple':
         A = HMM.initA(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])    
     else:
         A = HMM.initA2(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])
     
-    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*0.1) for i in range(10)])
+    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*0.1) for i in range(2)])
     B_Skov = HMM.initBwN(lmbd_0[0:5], N_ST_mas)
 
     
     tracts_HMM_mas=[]
 
     
-    for idx in range(0, n_eu):    
+    for idx in range(0, n_eu):  
+        print('da')  
         tracts_HMM=[[] for i in range(N)]
         for i in range(len(SEQ_mas)):
             tr=run_daiseg(lmbd_0, SEQ_mas[i], N_ST_mas, idx, seq_start_mas[i], arch_cover[i], A, B_our_mas, B_Skov)
