@@ -261,7 +261,7 @@ def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover, matrix_type):
     else:
         a = HMM.initA2(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])  
     
-    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*0.1) for i in range(5)])
+    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*0.1) for i in range(2)])
 
     
     b_Skov = HMM.initBwN(lambd_old[0:5], n_st)
