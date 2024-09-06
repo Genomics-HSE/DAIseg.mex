@@ -10,7 +10,7 @@ import useful2 as usfl
 
 N=5
 # each window is covered by cover[t] parameter which in [-0.001...0.999]. Cover_cut remove windows with low covering and transforms method to Skov. 
-cover_cut = 0.5 
+cover_cut = 0.8 
 
 #transitions and emissions in case of gaps in observable chromosome (centromeres/telomeres), not archaic gaps. 
 a_gaps=np.identity(N)
