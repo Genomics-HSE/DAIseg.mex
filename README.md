@@ -18,6 +18,10 @@ The description of the used files is [here][1]
 
 # Preparations of files
 
+Prepare file with ancestral alleles, use guide in the directory hg19/grch38 or download files from 
+
+
+
 To read more details for files preparation see [readme][2]. To avoid details use script 
 ```bash
  ./full.preparation.sh hg19 22 path.to/file.bed n1 n2 n3 1000GP path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/archaic name.out_vcf name.out_txt
