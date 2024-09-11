@@ -18,7 +18,7 @@ The description of the used files is [here][1]
 
 # Preparations of files
 
-Prepare file with ancestral alleles, use guide in the directory hg19/grch38 or download files from 
+Prepare file with ancestral alleles, use guide in the directory hg19/grch38 OR download prepared  files from https://drive.google.com/drive/folders/1_zE9eaV3psFPRdFatkq-R1yGluvjgiX6?usp=drive_link 
 
 
 
