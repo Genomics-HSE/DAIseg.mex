@@ -11,7 +11,7 @@ VCF1000=/media/scglab/T7/Work/data/1000GP/${i}/ALL.chr${i}.phase3_shapeit2_mvnca
 bcftools query -f '%POS %REF %ALT %INFO\n' ${VCF1000}> ./${dir}/POS.REF.ALT.INFO.chr${i}.txt
 
 
-python3 Ancestral.Alleles.py ${CHR}
+python3 Ancestral.Alleles.py ${i}
 
 rm ./${dir}/POS.REF.ALT.INFO.chr${i}.txt
 
