@@ -49,5 +49,5 @@ for cr in range(CHR,CHR-1, -1):
 
     with open('./Ancestral.Alleles/hg19.AA.chr'+str(cr)+'.txt','w') as f:
         for i in m_AA_bi:
-            f.write(str(i[0])+'\t'+str(i[1])+'\n')
+            f.write(str(CHR)+'\t'+str(i[0])+'\t'+str(i[1])+'\n')
 
