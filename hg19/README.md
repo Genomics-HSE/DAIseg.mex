@@ -3,6 +3,18 @@
 
 Choose this directory.
 
+
+
+## Ancestral alleles
+The goal is to create __hg19.AA.chr22.txt__ file  in created directory Ancestral.Allels with known ancestral alleles in positions.
+
+If you working with hg19 the list of acestral allels could be extract from vcf [1000GP panel][1]. Modify aa.hg19.sh file to specify the path to 1000GP file and choose the number of chromosome
+
+Run
+```bash
+./aa.hg19.sh
+```
+
 ## Archaic covering 
 The goal is to create __arch.covering.chr22.txt__ file with the window-covering by archaic samples. 
 Add full path to files  of   Altai.Neanderthal, Vindija33.19, Chagyrskaya/Okladnikova to variables n1, n2, n3 and run 
@@ -11,13 +23,6 @@ Add full path to files  of   Altai.Neanderthal, Vindija33.19, Chagyrskaya/Okladn
 ```
 
 
-## Ancestral alleles
-The goal is to create __hg19.AA.chr22.txt__ file  in created directory Ancestral.Allels with known ancestral alleles in positions.
-
-If you working with hg19 the list of acestral allels could be extract from vcf [1000GP panel][1]. Run
-```bash
-./ancestral.alleles.sh 22 path.to/1000GP.chr22
-```
 
 
 
