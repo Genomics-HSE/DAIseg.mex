@@ -16,7 +16,7 @@ arch=${12}
 outfilevcf=${13}
 outtxt=${14}
 
-
+aa=${15}
 
 
 cd $1
@@ -28,7 +28,7 @@ cd $1
 ./new.panel.preparation.Linux.sh ${CHR} ${mex} ${eu} ${na} ${af} ${bed} ${GP1000} ${n1} ${n2} ${n3} ${outfilevcf} ${outtxt}
 
 
-./new.make.obs.sh ${CHR} ${outfilevcf} ${mex} ${eu} ${na} ${af} ${arch}  ./Ancestral.Alleles/hg19.AA.chr${CHR}.txt ./regions/chr${CHR}.hg19.bed ${outtxt}
+./new.make.obs.sh ${CHR} ${outfilevcf} ${mex} ${eu} ${na} ${af} ${arch}  ${15} ./regions/chr${CHR}.hg19.bed ${outtxt}
 
 cd ../
 
