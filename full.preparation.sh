@@ -25,8 +25,6 @@ cd $1
 ./archaic.covering.sh ${CHR} ${bed} ${n1} ${n2} ${n3}
 
 
-./ancestral.alleles.sh ${CHR} ${GP1000}
-
 ./new.panel.preparation.Linux.sh ${CHR} ${mex} ${eu} ${na} ${af} ${bed} ${GP1000} ${n1} ${n2} ${n3} ${outfilevcf} ${outtxt}
 
 
