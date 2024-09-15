@@ -7,6 +7,8 @@ f_bed=sys.argv[1]
 f_pos=sys.argv[2]
 CHR=sys.argv[3]
 
+prefix=sys.argv[4]
+
 with open(f_bed,'r') as f:
     d=f.readlines()
 d=[d[i].replace('\n','').split('\t')[1:3] for i in range(len(d))]    
@@ -30,7 +32,7 @@ for i in lines:
         windows_cover[(i-domain[0][0])//L]+=1
 windows_cover=windows_cover/L
 
-with open('grch38.arch.covering.'+str(CHR)+'.txt','w') as f:
+with open(str(prefix)+'.arch.covering.'+str(CHR)+'.txt','w') as f:
     for j in windows_cover:
         f.write(str(j)+'\n')
 
