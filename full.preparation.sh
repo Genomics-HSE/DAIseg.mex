@@ -22,7 +22,7 @@ aa=${15}
 cd preparations
 
 
-./archaic.covering.sh ${CHR} ${bed} ${n1} ${n2} ${n3}
+./archaic.covering.sh ${CHR} ${bed} ${n1} ${n2} ${n3} ${dir}
 
 
 ./new.panel.preparation.Linux.sh ${CHR} ${mex} ${eu} ${na} ${af} ${bed} ${GP1000} ${n1} ${n2} ${n3} ${outfilevcf} ${outtxt}
