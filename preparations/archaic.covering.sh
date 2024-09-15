@@ -6,7 +6,7 @@ bed=$2
 n1=$3
 n2=$4
 n3=$5
-
+prefix=$6
 
 
 #n1=/media/scglab/T7/Work/data/neand/33.19/chr${CHR}_mq25_mapab100.vcf.gz
@@ -22,5 +22,5 @@ cat 1.txt 2.txt 3.txt|sort -u > ${CHR}.archaic.txt
 rm 1.txt 2.txt 3.txt
 
 
-python3 archaic.covering.py ${bed} ${CHR}.archaic.txt ${CHR}
+python3 archaic.covering.py ${bed} ${CHR}.archaic.txt ${CHR} ${prefix}
 rm ${CHR}.archaic.txt
