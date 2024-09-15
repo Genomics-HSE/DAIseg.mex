@@ -18,7 +18,7 @@ The description of the used files is [here][1]
 
 # Preparations of files
 
-Prepare file with ancestral alleles, use guide in the directory hg19/grch38 OR download prepared  files from https://drive.google.com/drive/folders/1_zE9eaV3psFPRdFatkq-R1yGluvjgiX6?usp=drive_link 
+Prepare file with ancestral alleles, use guide in the directory./preparations/hg19(grch38) OR download prepared files from [here][6]   
 
 
 
@@ -66,3 +66,4 @@ to obtain estimations of the  coalescent times and run DAIseg. Here par.file.txt
 [3]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
 [4]: http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
 [5]: http://ftp.eva.mpg.de/neandertal/ChagyrskayaOkladnikov/
+[6]: https://drive.google.com/drive/folders/1_zE9eaV3psFPRdFatkq-R1yGluvjgiX6?usp=drive_link
