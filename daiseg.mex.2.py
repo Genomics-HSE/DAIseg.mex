@@ -134,7 +134,7 @@ def run_daiseg_all(lmbd_0):
 
     
     for idx in range(0, n_eu):  
-        print('da')  
+          
         tracts_HMM=[[] for i in range(N)]
         for i in range(len(SEQ_mas)):
             tr=run_daiseg(lmbd_0, SEQ_mas[i], N_ST_mas, idx, seq_start_mas[i], arch_cover[i], A, B_our_mas, B_Skov)
