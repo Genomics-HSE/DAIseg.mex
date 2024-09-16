@@ -23,18 +23,20 @@ args = parser.parse_args()
 
 
 
-
 dict_all = usfl.main_read2(args.prepared_file)
 domain = usfl.read_bed(args.bed)
+
 seq_start, seq_end = domain[0][0], domain[-1][1]
 N = 5 # number of hidden states
 GEN_time, MU, RR, L, Lambda_0 = usfl.read_par_HMM(args.HMM_par)
 n_eu = len(dict_all[list(dict_all.keys())[0]]['Obs'])
 epsilon=1e-10
 
+
 P=[0.4,0.05, 0.4, 0.05, 0.1]
 d=MU*L
 cover_cut=0.8
+step=0.05
 
 #read the windows archaic covering 
 with open(args.arch_cover,'r') as f:
@@ -73,8 +75,17 @@ for ind in range(n_eu):
 
     
     sq=np.vstack([o_eu, o_na, o_af, o_nd])
+    
+#    if ind==0:
+#        print(sq[0][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
+#        print(sq[1][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
+#        print(sq[2][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
+#        print(sq[3][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
+        
+#        print((17203000-seq_start_mas[0])/1000)
 
     state_mas.append([max(o_eu), max(o_na), max(o_af), max(o_nd)])
+
     
 
 #    sq=np.vstack([usfl.make_obs_ref(dict_all, domain, ind, L,  'EU'), usfl.make_obs_ref(dict_all, domain, ind, L,  'NA'), usfl.make_obs_ref(dict_all, domain, ind, L,  'AF'), usfl.make_obs_ref(dict_all, domain, ind, L,  'Archaic')])
@@ -85,12 +96,16 @@ for ind in range(n_eu):
     
     SEQ.append(sq)
     N_ST.append(n_st)
+    
+
 
 
 state_mas=np.array(state_mas)
 SEQ=np.array(SEQ)
 N_st=SEQ.max()+1
 N_ST_mas=[max(state_mas[:, i])+1 for i in range(4)]
+
+
 
 #split observations by windows, removing gaps
 SEQ_mas=[]
@@ -101,11 +116,12 @@ for i in range(len(len_mas)):
     SEQ_mas.append(SEQ[:,p1:(p2+1)])
     arch_cover.append(cover[p1:(p2+1)])        
         
-        
+
 print('Observation sequences has been created')       
+
+
         
 def run_daiseg(lmbd_opt,seq, n_st, idx, start, ar_cover, a, b_our_mas, b_Skov):
-
 
 
     tracts_HMM =  HMM.get_HMM_tracts(HMM.viterbi_modified(seq [idx], P, a, b_our_mas, b_Skov, ar_cover))
@@ -126,7 +142,7 @@ def run_daiseg_all(lmbd_0):
     else:
         A = HMM.initA2(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])
     
-    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*0.1) for i in range(2)])
+    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*step) for i in range(5)])
     B_Skov = HMM.initBwN(lmbd_0[0:5], N_ST_mas)
 
     
@@ -134,7 +150,7 @@ def run_daiseg_all(lmbd_0):
 
     
     for idx in range(0, n_eu):  
-          
+        
         tracts_HMM=[[] for i in range(N)]
         for i in range(len(SEQ_mas)):
             tr=run_daiseg(lmbd_0, SEQ_mas[i], N_ST_mas, idx, seq_start_mas[i], arch_cover[i], A, B_our_mas, B_Skov)
