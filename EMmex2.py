@@ -11,6 +11,7 @@ import useful2 as usfl
 N=5
 # each window is covered by cover[t] parameter which in [-0.001...0.999]. Cover_cut remove windows with low covering and transforms method to Skov. 
 cover_cut = 0.8 
+step = 0.05
 
 #transitions and emissions in case of gaps in observable chromosome (centromeres/telomeres), not archaic gaps. 
 a_gaps=np.identity(N)
@@ -24,7 +25,7 @@ def alpha_scaled_opt_gaps(a,b, b_mas, o, p, gaps, cover):
     alpha = np.zeros((N, len(o)))
 
     if cover[0]>cover_cut:
-        alpha[:,0] = b_mas[int(cover[0]*10)-int(cover_cut*10),: , o[0][0],o[0][1], o[0][2], o[0][3]]*p
+        alpha[:,0] = b_mas[int((cover[0]-cover_cut)/step),: , o[0][0],o[0][1], o[0][2], o[0][3]]*p
     else:
         alpha[:, 0] = b[:, o[0][0],o[0][1],o[0][2]] * p
     
@@ -41,7 +42,7 @@ def alpha_scaled_opt_gaps(a,b, b_mas, o, p, gaps, cover):
         else:
             if cover[t] > cover_cut:
                 for i in range(0, N):  
-                    alpha[i, t] = np.dot(alpha[:, t-1],a[:,i]) * b_mas[int(cover[t]*10)-int(cover_cut*10),i, o[t][0],o[t][1], o[t][2], o[t][3]]   
+                    alpha[i, t] = np.dot(alpha[:, t-1],a[:,i]) * b_mas[int((cover[t]-cover_cut)/step), i, o[t][0],o[t][1], o[t][2], o[t][3]]   
 
     
             else:
@@ -78,7 +79,7 @@ def beta_scaled_opt_gaps(a,b, b_mas, o, scaling_factors, gaps, cover):
             if cover[t+1] > cover_cut:
                 for i in range(0, N):             
                     for l in range(0, N):
-                        beta[i, t] += a[i, l] * b_mas[int(cover[t+1]*10)-int(cover_cut*10),l, o[t+1][0],o[t+1][1], o[t+1][2],o[t+1][3]] * beta[l, t+1]
+                        beta[i, t] += a[i, l] * b_mas[int((cover[t+1]-cover_cut)/step),l, o[t+1][0],o[t+1][1], o[t+1][2],o[t+1][3]] * beta[l, t+1]
                 
             
             else:    
@@ -210,7 +211,7 @@ def new_lambda_n_common_gaps(o_mas, gamma_mas, gaps, cover):
                 if cover[t] > cover_cut:
                     
                     lmbd +=  o[t, 3] * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + o[t, 2] * (gamma[1, t] + gamma[3, t]) 
-                    denom += (int(cover[t]*10)/10+0.1) * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + (gamma[1, t] + gamma[3, t]) 
+                    denom += (int(cover[t]/step)*step) * ( gamma[0, t] + gamma[2, t]+gamma[4, t]) + (gamma[1, t] + gamma[3, t]) 
                 else:
                     lmbd += o[t, 2] * (gamma[1, t] + gamma[3, t]) 
                     denom += (gamma[1, t] + gamma[3, t])
@@ -240,7 +241,7 @@ def new_lambda_i_common_gaps(o_mas, gamma_mas, gaps, cover):
                     nom += o[t, 3] * (g[1, t] + g[3, t])
                     
                     
-                    denom += (int(cover[t]*10)/10+0.1) * (g[1, t] + g[3, t])
+                    denom += (int(cover[t]/step)*step) * (g[1, t] + g[3, t])
                   
    
                 
@@ -261,7 +262,7 @@ def E_step_gaps(cut,  p, O, n_st, mu,rr, lambd_old, gaps, cover, matrix_type):
     else:
         a = HMM.initA2(lambd_old[5]/d, lambd_old[6]/d, rr, cut, lambd_old[7],  lambd_old[8],  lambd_old[9],  lambd_old[10])  
     
-    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*0.1) for i in range(2)])
+    b_our_mas = np.array([HMM.initB_arch_cover( lambd_old, n_st, cover_cut+i*step) for i in range(5)])
 
     
     b_Skov = HMM.initBwN(lambd_old[0:5], n_st)
@@ -302,5 +303,6 @@ def EM_common_gaps(p, o_mas, n_states, mut_rate, rr, lambda_0, epsilon, cut,  em
         if LNG.norm(lmbd_new-lmbd) < epsilon:
             break
         lmbd = lmbd_new
-    print(i)
+
+    print('Number EM steps',i)
     return lmbd
