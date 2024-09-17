@@ -51,10 +51,10 @@ python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file
 # Run DAI.seg using EM algorithm
 
 ```bash
-python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM yes --EM_steps 20  --prepared_file ./hg19/allels.ref.and.obs.chr22.txt --out_prefix out.chr22 --arch_cover ./hg19/arch.covering.chr22.txt --transition_matrix full
+python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM yes --EM_steps 20 --EM_samples 10 --prepared_file ./hg19/allels.ref.and.obs.chr22.txt --out_prefix out.chr22 --arch_cover ./hg19/arch.covering.chr22.txt --transition_matrix full
 ```
 to obtain estimations of the  coalescent times and run DAIseg. Here par.file.txt is used as the initial guess for EM algorithm.
-
+--EM_samples is the number of sampes for training.
 
 
 
