@@ -201,11 +201,14 @@ def make_obs_ref(nested_dict, domain, ind, L,  ref):
         
             if nested_dict[k]['Obs'][ind] not in nested_dict[k][ref] and len(nested_dict[k][ref])!=0:
                 obs_ref[j]+=1
+
+                    
         else:
             if nested_dict[k]['Obs'][ind] not in nested_dict[k][ref] and len(nested_dict[k][ref])!=0 and nested_dict[k]['Obs'][ind]!=nested_dict[k]['AA']:
                 
                 obs_ref[j]+=1
-    
+                
+
 
     return np.array(obs_ref)
 

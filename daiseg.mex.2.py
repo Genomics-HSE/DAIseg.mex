@@ -10,10 +10,13 @@ parser = argparse.ArgumentParser(description='DAIseg')
 parser.add_argument('--bed', type=str, help='Region bed file')
 parser.add_argument('--EM', type=str, help='Whether or not to use EM algorithm')
 parser.add_argument('--EM_steps', type=str, help='number of EMsteps')
+parser.add_argument('--EM_samples', type=int, help='number of samples used in EM algorithm')
+
+
 parser.add_argument('--HMM_par', type= str, help='File with parameters')
 parser.add_argument('--out_prefix', type= str, help = 'Prefix to output file' )
 
-parser.add_argument('--EM_est', type= str, help = 'Make estimation of the all parameters or only coalescent times' )
+
 parser.add_argument('--prepared_file', type=str, help='dlkfjgljk')
 parser.add_argument('--arch_cover', type=str)
 parser.add_argument('--obs_samples', type=str, help='File with samples names')
@@ -75,29 +78,18 @@ for ind in range(n_eu):
 
     
     sq=np.vstack([o_eu, o_na, o_af, o_nd])
-    
-#    if ind==0:
-#        print(sq[0][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
-#        print(sq[1][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
-#        print(sq[2][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
-#        print(sq[3][int((17203000-seq_start_mas[0])/1000)+94:int((17203000-seq_start_mas[0])/1000)+100])
-        
-#        print((17203000-seq_start_mas[0])/1000)
-
     state_mas.append([max(o_eu), max(o_na), max(o_af), max(o_nd)])
 
     
 
 #    sq=np.vstack([usfl.make_obs_ref(dict_all, domain, ind, L,  'EU'), usfl.make_obs_ref(dict_all, domain, ind, L,  'NA'), usfl.make_obs_ref(dict_all, domain, ind, L,  'AF'), usfl.make_obs_ref(dict_all, domain, ind, L,  'Archaic')])
     
-    sq=sq.transpose()
-    
-    n_st = sq.max()+1
-    
+    sq=sq.transpose()    
+    n_st = sq.max()+1    
     SEQ.append(sq)
     N_ST.append(n_st)
     
-
+SEQ_EM=np.array(SEQ[0 : (args.EM_samples+1)])
 
 
 state_mas=np.array(state_mas)
@@ -108,12 +100,14 @@ N_ST_mas=[max(state_mas[:, i])+1 for i in range(4)]
 
 
 #split observations by windows, removing gaps
-SEQ_mas=[]
+SEQ_mas, SEQ_EM_mas=[], []
+
 arch_cover=[]
 for i in range(len(len_mas)):
     p1=int((seq_start_mas[i]-seq_start_mas[0])/1000)
     p2=int((seq_end_mas[i]-seq_start_mas[0])/1000)
     SEQ_mas.append(SEQ[:,p1:(p2+1)])
+    SEQ_EM_mas.append(SEQ_EM[:,p1:(p2+1)])
     arch_cover.append(cover[p1:(p2+1)])        
         
 
@@ -175,7 +169,7 @@ if args.EM=='no':
     
     
 if args.EM=='yes': 
-    Lambda_opt = EM_gaps(SEQ, Lambda_0, N_ST_mas, cover)    
+    Lambda_opt = EM_gaps(SEQ_EM, Lambda_0, N_ST_mas, cover)    
     Tracts_HMM_mas = run_daiseg_all(Lambda_opt)    
  
  
