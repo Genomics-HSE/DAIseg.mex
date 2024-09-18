@@ -24,7 +24,7 @@ Prepare file with ancestral alleles, use guide in the directory./preparations/hg
 
 To read more details for files preparation see [readme][2]. To avoid details use script 
 ```bash
- ./full.preparation.sh hg19 22 path.to/file.bed n1 n2 n3 1000GP path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/archaic name.out_vcf name.out_txt path.to/ancestral.allele.file
+ ./full.preparation.Linux(MacOS).sh hg19 22 path.to/file.bed n1 n2 n3 1000GP path.to/mex  path.to/europeans path.to/americans path.to/africans path.to/archaic name.out_vcf name.out_txt path.to/ancestral.allele.file
 ```
 where 1000GP, n1, n2, n3 are [vcf with 1000 Genome project][3], [neanderthal vcfs][4] and [chagyrskaya][5] (needed to be splited). 
 
