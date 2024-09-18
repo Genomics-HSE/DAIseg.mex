@@ -214,6 +214,85 @@ def make_obs_ref(nested_dict, domain, ind, L,  ref):
 
 
 
+def make_obs_indep(nested_dict, domain, ind, L):
+    start, end = domain[0][0], domain[-1][1]
+    if float(end-start) % L != 0:
+        T = int((end-start)/ L) + 1
+    
+
+
+    
+    for k in nested_dict.keys():
+        j=int((k-start)/L) #window-positions
+        
+        ref_n=0
+        s=[0 for i in range(4)]
+        
+        for ref in ['EU', 'NA', 'AF', 'Archaic']:
+        
+            if nested_dict[k].get('AA') is None:        
+                if nested_dict[k]['Obs'][ind] not in nested_dict[k][ref] and len(nested_dict[k][ref])!=0:
+                    s[ref_n] += 1
+            else:
+                if nested_dict[k]['Obs'][ind] not in nested_dict[k][ref] and len(nested_dict[k][ref])!=0 and nested_dict[k]['Obs'][ind]!=nested_dict[k]['AA']:                
+                    s[ref_n] += 1
+            ref_n+=1
+            
+        o_mas=[ [np.zeros(T, dtype=int) for i in range(4)] for i in range(5)]
+        
+        #Modern EU
+        
+        if [s[0], s[1], s[2], s[3]] == [1,1,1,1]:     
+            o_mas[0][0][j] += 1
+        if [s[0], s[1], s[2], s[3]] == [0,1,1,1]:     
+            o_mas[0][1][j] += 1           
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,1]:     
+            o_mas[0][2][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [0,0,0,1]:     
+            o_mas[0][3][j] += 1  
+
+        #Archaic EU
+        if [s[0], s[1], s[2], s[3]] == [1,1,1,1]:     
+            o_mas[1][0][j] += 1
+        if [s[0], s[1], s[2], s[3]] == [0,1,1,1]:     
+            o_mas[1][1][j] += 1           
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,1]:     
+            o_mas[1][2][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,0]:     
+            o_mas[1][3][j] += 1    
+
+
+             
+  
+        if [s[0], s[1], s[2], s[3]] == [1,0,1,1]:     
+            o_mas[2][0][j] += 1
+        if [s[0], s[1], s[2], s[3]] == [1,1,1,1]:     
+            o_mas[2][1][j] += 1           
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,1]:     
+            o_mas[2][2][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [0,0,0,1]:     
+            o_mas[2][3][j] += 1   
+            
+            
+        if [s[0], s[1], s[2], s[3]] == [1,0,1,1]:     
+            o_mas[3][0][j] += 1
+        if [s[0], s[1], s[2], s[3]] == [1,1,1,1]:     
+            o_mas[3][1][j] += 1           
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,1]:     
+            o_mas[3][2][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [0,0,1,0]:     
+            o_mas[3][3][j] += 1           
+        
+
+        if [s[0], s[1], s[2], s[3]] == [1,1,0,1]:     
+            o_mas[4][0][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [1,1,1,1]:     
+            o_mas[4][2][j] += 1     
+        if [s[0], s[1], s[2], s[3]] == [0,0,0,1]:     
+            o_mas[4][3][j] += 1   
+            
+    return o_mas
+
 def read_out(file):
     with open(file, 'r') as f:
         l=f.readlines()
