@@ -61,7 +61,7 @@ to obtain estimations of the  coalescent times and run DAIseg. Here par.file.txt
 
 [1]: [here](https://github.com/Genomics-HSE/DAIseg/blob/main/File.types.md)
 [2]: https://github.com/Genomics-HSE/DAIseg/blob/main/hg19/README.md
-
+[6]: https://drive.google.com/drive/folders/1_zE9eaV3psFPRdFatkq-R1yGluvjgiX6?usp=sharing
 
 [3]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz 
 [4]: http://cdna.eva.mpg.de/neandertal/Vindija/VCF/
