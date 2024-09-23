@@ -44,7 +44,7 @@ There are two options without EM-algorithm and with EM algorithm.
 
 
 ```bash
-python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM no --prepared_file ./hg19/name.out_txt --out_prefix out.chr --arch_cover ./hg19/arch.covering.chr22.txt ----transition_matrix full --obs_type simple
+python3 daiseg.mex.2.py --obs_samples path.to/obserables.list --bed path.to/file.bed   --HMM_par par.file.txt --EM no --prepared_file ./hg19/name.out_txt --out_prefix out.chr --arch_cover ./hg19/arch.covering.chr22.txt --transition_matrix full --obs_type simple
 ```
 
 
