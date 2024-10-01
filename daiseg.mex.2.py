@@ -35,7 +35,7 @@ seq_start, seq_end = domain[0][0], domain[-1][1]
 N = 5 # number of hidden states
 GEN_time, MU, RR, L, Lambda_0 = usfl.read_par_HMM(args.HMM_par)
 n_eu = len(dict_all[list(dict_all.keys())[0]]['Obs'])
-epsilon=1e-10
+epsilon=1e-8
 
 
 P=[0.4,0.05, 0.4, 0.05, 0.1]
