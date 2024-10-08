@@ -243,7 +243,8 @@ def new_lambda_i_common_gaps(o_mas, gamma_mas, gaps, cover):
                     
                     denom += (int(cover[t]/step)*step) * (g[1, t] + g[3, t])
                   
-   
+    if denom==0: # only in case of no archaic covering
+        return 0
                 
     return nom / denom
     
