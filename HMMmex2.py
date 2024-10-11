@@ -3,7 +3,7 @@ import math
 
 N=5
 
-cover_cut=0.8
+cover_cut=0.25
 step=0.05
 #Ti: Introgression of Nd
 #Tmex: Time in Mexico
@@ -373,7 +373,7 @@ def viterbi_modified(V, initial_distribution, a, b_our_mas, b_Skov, archaic_cove
     omega = np.zeros((T, M))
    
 
-    if archaic_cover[0]>0.8:
+    if archaic_cover[0]>=cover_cut:
         omega[0, :] = np.log(initial_distribution * b_our_mas[int((archaic_cover[0]-cover_cut)/step),:, V[0][0],V[0][1], V[0][2], V[0][3]])
 
     else:
@@ -385,7 +385,7 @@ def viterbi_modified(V, initial_distribution, a, b_our_mas, b_Skov, archaic_cove
     for t in range(1, T):
         for j in range(M):
             # Same as Forward Probability
-            if archaic_cover[t]>0.8:
+            if archaic_cover[t]>=cover_cut:
                 probability = omega[t - 1] + np.log(a[:, j]) + np.log(b_our_mas[int((archaic_cover[t]-cover_cut)/step),j, V[t][0], V[t][1], V[t][2], V[t][3]])
                 
             else:

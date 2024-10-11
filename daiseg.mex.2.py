@@ -35,12 +35,12 @@ seq_start, seq_end = domain[0][0], domain[-1][1]
 N = 5 # number of hidden states
 GEN_time, MU, RR, L, Lambda_0 = usfl.read_par_HMM(args.HMM_par)
 n_eu = len(dict_all[list(dict_all.keys())[0]]['Obs'])
-epsilon=1e-8
+epsilon=1e-7
 
 
 P=[0.4,0.05, 0.4, 0.05, 0.1]
 d=MU*L
-cover_cut=0.8
+cover_cut=0.25
 step=0.05
 
 #read the windows archaic covering 
@@ -133,7 +133,7 @@ def run_daiseg_all(lmbd_0):
     else:
         A = HMM.initA2(lmbd_0[5]/d, lmbd_0[6]/d, RR, L, lmbd_0[7],  lmbd_0[8],  lmbd_0[9],  lmbd_0[10])
     
-    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*step) for i in range(5)])
+    B_our_mas = np.array([HMM.initB_arch_cover( lmbd_0, N_ST_mas, cover_cut+i*step) for i in range(int((1-cover_cut)/step)+1)])
     B_Skov = HMM.initBwN(lmbd_0[0:5], N_ST_mas)
 
     
